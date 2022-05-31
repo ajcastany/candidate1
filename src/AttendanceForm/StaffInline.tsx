@@ -2,7 +2,11 @@ import React from "react";
 import {Staff} from '../Data/Staff';
 
 function formatDateToTime(date:Date) {
-    return date.getHours + ':' + date.getMinutes
+    return new Date(date).toLocaleTimeString('en-GB', {hour: '2-digit', minute: '2-digit'})
+}
+
+function boolToString(bool:boolean) {
+    return bool.toString();
 }
 
 interface StaffInlineProps {
@@ -12,14 +16,14 @@ function StaffInline(props: StaffInlineProps) {
     const { staff } = props;
     return (
         <div>
-            <h5>id</h5>
-            <h5>{staff.name}</h5>
-            <h5>{staff.department}</h5>
-            <h5>{staff.meetingRoom}</h5>
-            <h5>{formatDateToTime(staff.timeIn)}</h5>
-            <h5>{formatDateToTime(staff.timeOut)}</h5>
-            <h5>{staff.tagIssue}</h5>
-            <h5>{staff.tagReturned}</h5>
+            <p>ID: {staff.id}</p>
+            <p>Name: {staff.name}</p>
+            <p>Dpto: {staff.department}</p>
+            <p>Room: {staff.meetingRoom}</p>
+            <p>IN: {formatDateToTime(staff.timeIn)}</p>
+            <p>OUT: {formatDateToTime(staff.timeOut)}</p>
+            <p>TAG:{staff.tagIssue}</p>
+            <p>Ret: {boolToString(staff.tagReturned)}</p>
         </div>
     )
 }

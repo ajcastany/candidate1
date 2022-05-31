@@ -8,27 +8,27 @@ export const MOCK_DATA = [
         meetingRoom: '',
         timeIn: '2010-01-01T12:00:00',
         timeOut: '2010-01-01T12:00:00',
-        tagIssue: '',
+        tagIssue: ' ',
         tagReturned: false
     }),
     new Staff({
         id: 2,
         name: "Jane Doe",
         department: "Facilities",
-        meetingRoom: '',
+        meetingRoom: 'WA1',
         timeIn: '2010-01-01T12:00:00',
         timeOut: '2010-01-01T12:00:00',
-        tagIssue: '',
+        tagIssue: ' ',
         tagReturned: false
     }),
     new Staff({
         id: 3,
         name: "Stephen Doe",
         department: "HR",
-        meetingRoom: '',
+        meetingRoom: 'WA3',
         timeIn: '2010-01-01T12:00:00',
         timeOut: '2010-01-01T12:00:00',
-        tagIssue: '',
+        tagIssue: 't54',
         tagReturned: false
     })
 ];
