@@ -1,17 +1,26 @@
 import React from "react";
+import { Container, Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 function HomePage() {
     return (
         <div>
-            <h2>Select one of the options bellow</h2>
-            <Link to='admin'>
-                Admin Panel
-            </Link>
-            <Link to='attendance'>
-                Attendance Form
-            </Link>
+            <h1 className="display-1 text-center">Select one of the options bellow</h1>
+            <Container>
+                <Row className="justify-content-md-center my-top-margin">
+                    <Col className='text-center'>
+                    <Link className='display-4' to='admin'>
+                        Admin Panel
+                    </Link>
+                    </Col>
 
+                    <Col className="text-center">
+                    <Link className='display-4' to='attendance'>
+                        Attendance Form
+                    </Link>
+                </Col>
+                </Row>
+            </Container>
         </div>
     );
 }
