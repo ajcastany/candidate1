@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
 import {Routes, Route} from 'react-router-dom';
+import Navigation from './Home/Navigation';
 import HomePage from "./Home/HomePage";
 import AdminPanel from "./AdminPanel/AdminPanel";
 import AttendanceForm from "./AttendanceForm/AttendanceForm";
@@ -8,7 +9,7 @@ import AttendanceForm from "./AttendanceForm/AttendanceForm";
 function App() {
   return (
     <div>
-      <h1>candidate</h1>
+      <Navigation />
       <Routes>
         <Route path="/" element={<HomePage />}/>
         <Route path="/admin" element={<AdminPanel />} />
