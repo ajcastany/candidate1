@@ -17,7 +17,7 @@ export class Staff {
         if (initializer.id) this.id = initializer.id;
         if (initializer.name) this.name = initializer.name;
         if (initializer.department) this.department = initializer.department;
-        if (initializer.meetingRoom) this.meetingRoom = initializer.meeting_room;
+        if (initializer.meetingRoom) this.meetingRoom = initializer.meetingRoom;
         if (initializer.timeIn) this.timeIn = initializer.timeIn;
         if (initializer.timeOut) this.timeOut = initializer.timeOut;
         if (initializer.tagIssue) this.tagIssue = initializer.tagIssue;
