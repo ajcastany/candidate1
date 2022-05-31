@@ -2,7 +2,7 @@ import { Staff } from "../Staff";
 
 export const MOCK_DATA = [
     new Staff({
-        id: 0,
+        id: 1,
         name: "Jhon Doe",
         department: "Operations",
         meetingRoom: '',
@@ -12,7 +12,7 @@ export const MOCK_DATA = [
         tagReturned: false
     }),
     new Staff({
-        id: 1,
+        id: 2,
         name: "Jane Doe",
         department: "Facilities",
         meetingRoom: '',
@@ -22,7 +22,7 @@ export const MOCK_DATA = [
         tagReturned: false
     }),
     new Staff({
-        id: 2,
+        id: 3,
         name: "Stephen Doe",
         department: "HR",
         meetingRoom: '',
