@@ -11,8 +11,8 @@ function App() {
       <h1>candidate</h1>
       <Routes>
         <Route path="/" element={<HomePage />}/>
-        <Route path="admin" element={<AdminPanel />} />
-        <Route path="attendance" element={<AttendanceForm />} />
+        <Route path="/admin" element={<AdminPanel />} />
+        <Route path="/attendance" element={<AttendanceForm />} />
       </Routes>
     </div>
   );
