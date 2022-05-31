@@ -1,7 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-import StartHere from "../Start/StartHere";
-
+import { Link } from "react-router-dom";
 
 function HomePage() {
     return (
