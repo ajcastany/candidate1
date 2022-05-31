@@ -15,16 +15,19 @@ interface StaffInlineProps {
 function StaffInline(props: StaffInlineProps) {
     const { staff } = props;
     return (
-        <div>
-            <p>ID: {staff.id}</p>
-            <p>Name: {staff.name}</p>
-            <p>Dpto: {staff.department}</p>
-            <p>Room: {staff.meetingRoom}</p>
-            <p>IN: {formatDateToTime(staff.timeIn)}</p>
-            <p>OUT: {formatDateToTime(staff.timeOut)}</p>
-            <p>TAG:{staff.tagIssue}</p>
-            <p>Ret: {boolToString(staff.tagReturned)}</p>
-        </div>
+        <React.Fragment>
+            <tr>
+                <th scope='row'>{staff.id}</th>
+                <td>{staff.name}</td>
+                <td>{staff.department}</td>
+                <td>{staff.meetingRoom}</td>
+                <td>{formatDateToTime(staff.timeIn)}</td>
+                <td>{formatDateToTime(staff.timeOut)}</td>
+                <td>{staff.tagIssue}</td>
+                <td>{boolToString(staff.tagReturned)}</td>
+                
+            </tr>
+        </React.Fragment>
     )
 }
 

@@ -1,5 +1,4 @@
 import React from "react";
-import { Row } from "react-bootstrap";
 import { Staff } from "../Data/Staff";
 import StaffInline from './StaffInline';
 
@@ -9,11 +8,11 @@ interface StaffListProps {
 
 function AttendanceList({staffs}: StaffListProps) {
         const items = staffs.map(staff => (
-        <div>
-            <StaffInline staff={staff}></StaffInline>
-        </div>
+        <React.Fragment>
+                <StaffInline staff={staff}></StaffInline>            
+        </React.Fragment>
         ));
-        return <div>{items}</div>
+        return <React.Fragment>{items}</React.Fragment>
 }
 
 export default AttendanceList;
