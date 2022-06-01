@@ -9,13 +9,13 @@ function HomePage() {
             <Container>
                 <Row className="justify-content-md-center my-top-margin">
                     <Col className='text-center'>
-                    <Link className='display-4' to='admin'>
+                    <Link className='display-3' to='admin'>
                         Admin Panel
                     </Link>
                     </Col>
 
                     <Col className="text-center">
-                    <Link className='display-4' to='attendance'>
+                    <Link className='display-3' to='attendance'>
                         Attendance Form
                     </Link>
                 </Col>
