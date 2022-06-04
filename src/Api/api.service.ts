@@ -5,13 +5,13 @@ const axios = require('axios');
 
 /* from https://www.delftstack.com/howto/typescript/axios-typescript/ */
 
-interface Staff {
+export interface Staff {
     id: number,
     name: string,
     department: string;
 }
 
-interface DailyForm {
+export interface DailyForm {
     form: string[],
     name: string,
     department: string
@@ -39,7 +39,7 @@ export const StaffApiService = {
     getAllStaff : () : Promise<Staff[]> => StaffRequests.get('/staff/all'),
     getStaffByID : (id:string) : Promise<Staff> => StaffRequests.get(`/staff/${id}`),
     getDay: (day:string) : Promise<DailyForm> => DailyFormRequests.get(`/daily_form/${day}`),
-    getAllDays: () : Promise<DailyForm> => DailyFormRequests.get('/daily_form/all_days'),
+    getAllDays: () : Promise<DailyForm[]> => DailyFormRequests.get('/daily_form/all_days'),
     addRoom: (day_form:DailyForm) : Promise<DailyForm> => DailyFormRequests.post('/daily_form/room', day_form),
     addTimeInOut: (day_form:DailyForm) : Promise<DailyForm> => DailyFormRequests.post('/daily_form/time', day_form),
     addTag: (day_form:DailyForm): Promise<DailyForm> => DailyFormRequests.post('/daily_form/tag', day_form),
