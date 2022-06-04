@@ -11,7 +11,7 @@ class ApiService {
     tagRet(data:string) {return http.post('api/daily_form/tag_ret', data);}
 }
 
-
+export default new ApiService();
 
 
 
