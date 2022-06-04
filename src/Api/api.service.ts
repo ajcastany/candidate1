@@ -11,6 +11,12 @@ interface Staff {
     department: string;
 }
 
+interface DailyForm {
+    form: string[],
+    name: string,
+    department: string
+}
+
 const http = axios.create({
     baseURL: 'http://localhost:5000/api',
     headers: {
@@ -24,9 +30,21 @@ const StaffRequests = {
     get: (url: string) => http.get(url).then(responseBody)
 };
 
+const DailyFormRequests = {
+    get: (url:string) => http.get(url).then(responseBody),
+    post: (url:string, body:DailyForm) => http.post(url, body).then(responseBody)
+}
+
 export const StaffApiService = {
     getAllStaff : () : Promise<Staff[]> => StaffRequests.get('/staff/all'),
-    getStaffByID : (id:string) : Promise<Staff> => StaffRequests.get(`/staff/${id}`)
+    getStaffByID : (id:string) : Promise<Staff> => StaffRequests.get(`/staff/${id}`),
+    getDay: (day:string) : Promise<DailyForm> => DailyFormRequests.get(`/daily_form/${day}`),
+    getAllDays: () : Promise<DailyForm> => DailyFormRequests.get('/daily_form/all_days'),
+    addRoom: (day_form:DailyForm) : Promise<DailyForm> => DailyFormRequests.post('/daily_form/room', day_form),
+    addTimeInOut: (day_form:DailyForm) : Promise<DailyForm> => DailyFormRequests.post('/daily_form/time', day_form),
+    addTag: (day_form:DailyForm): Promise<DailyForm> => DailyFormRequests.post('/daily_form/tag', day_form),
+    addTagRet: (day_form:DailyForm): Promise<DailyForm> => DailyFormRequests.post('/daily_form/tag_ret', day_form)
+
 };
 
 /* 
