@@ -1,4 +1,4 @@
-import { AxiosResponse } from "axios";
+import { AxiosResponse } from "Axios";
 
 const axios = require('axios');
 
@@ -12,7 +12,7 @@ interface Staff {
 }
 
 const http = axios.create({
-    baseURL: 'http://localhost:5000/api/',
+    baseURL: 'http://localhost:5000/api',
     headers: {
         "Content-type": "application/json"
     }
@@ -21,8 +21,8 @@ const http = axios.create({
 const responseBody = (response: AxiosResponse) => response.data;
 
 const StaffRequests = {
-    get (url: string) => http.get<Staff>(url).then(responseBody),
-}
+    get: (url: string) => http.get(url).then(responseBody)
+};
 
 export const StaffApiService = {
     getAllStaff : () : Promise<Staff[]> => StaffRequests.get('/staff/all'),

@@ -15,14 +15,16 @@ interface Staff {
     department: string;
 }
 
-const [staffs, setStaffs]:[Staff[], (staffs: Staff[]) => void] = useState<Staff[]>([]);
+
 
 
 function StartHere() {
+    const [staffs, setStaffs]:[Staff[], (staffs: Staff[]) => void] = useState<Staff[]>([]);
     StaffApiService.getAllStaff().then((data) => setStaffs(data));
+    console.log(staffs);
     return (
     <Container>
-        <h2>Test: {staffs[0].id} Name {staffs[0].name}, department {staffs[0].department} </h2>
+        <h2>Test: </h2>
         <p>asdf</p>
     </Container>
     );
