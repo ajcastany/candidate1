@@ -1,23 +1,30 @@
-import React from "react";
-import { BrowserRouter as Router, Routes, Route, Link as NavLink } from "react-router-dom";
-import AdminPanel from "../AdminPanel/AdminPanel";
-import AttendanceForm from "../AttendanceForm/AttendanceForm";
+import React, { useState } from "react";
+import { Container } from "react-bootstrap";
+import { StaffApiService } from "../Api/api.service";
+/* async function getResponse() {
+    ApiService.getAllStaff().then(response => {
+        console.log(response.data)
+    return response.data;
+    });
+    
+} */
+
+interface Staff {
+    id: number,
+    name: string,
+    department: string;
+}
+
+const [staffs, setStaffs]:[Staff[], (staffs: Staff[]) => void] = useState<Staff[]>([]);
+
 
 function StartHere() {
+    StaffApiService.getAllStaff().then((data) => setStaffs(data));
     return (
-        <Router>
-        <h2>Select one of the forms bellow</h2>
-        <NavLink to='/admin' className={''}>
-            Admin Panel
-        </NavLink>
-        <NavLink to='/attendance' className={''}>
-            Attendance Form
-        </NavLink>
-        <Routes>
-            <Route path='/admin' element={<AdminPanel/>} />
-            <Route path='/attendance' element={<AttendanceForm/>} />
-        </Routes>
-    </Router>
+    <Container>
+        <h2>Test: {staffs[0].id} Name {staffs[0].name}, department {staffs[0].department} </h2>
+        <p>asdf</p>
+    </Container>
     );
 }
 
