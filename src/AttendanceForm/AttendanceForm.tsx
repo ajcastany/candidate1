@@ -6,19 +6,20 @@ import { Staff } from "../Data/Staff";
 import {MOCK_DATA} from "../Data/TEST/MockStaff"
 
 function BuildRowData(data:DailyForm[]) {
+    var staff_list:Staff[] = [];
     if (data.length == 0) {
         console.log("no data");
-        return;
+        return staff_list;
     }
 
-    var staff_list:Staff[] = [];
+    
     //var dataJSON = JSON.stringify(data);
     //console.log(dataJSON);
 
     data.forEach(element => {
         var elementTXT = JSON.stringify(element);
         var elementJSON = JSON.parse(elementTXT);
-        console.log(elementJSON[0].id);
+        
          var staff:Staff = new Staff({
             id: elementJSON[0].id,
             name: elementJSON[1],
@@ -29,8 +30,10 @@ function BuildRowData(data:DailyForm[]) {
             tagIssue: elementJSON[0].tagIssue,
             tagReturned: elementJSON[0].tagReturned
         });
-        console.log(staff);
+        staff_list.push(staff);
     });
+    console.log(staff_list);
+    return staff_list;
 }
 
 function AttendanceForm() {
@@ -41,7 +44,7 @@ function AttendanceForm() {
         StaffApiService.getAllDays().then((data) => setDailyForms(data));
     }, [])
     //console.log(daily_forms);
-    BuildRowData(daily_forms);
+    let rowData:Staff[] = BuildRowData(daily_forms);
     return (
         <div>
             <div className="blue-strip">
@@ -62,7 +65,7 @@ function AttendanceForm() {
                         </tr>
                     </thead>
                     <tbody>
-                            <AttendanceList staffs={MOCK_DATA}/>        
+                            <AttendanceList staffs={rowData}/>        
                     </tbody>
                 </table>
             </div>
