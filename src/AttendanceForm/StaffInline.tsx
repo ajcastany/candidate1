@@ -3,7 +3,6 @@ import { Button } from "react-bootstrap";
 import {Staff} from '../Data/Staff';
 
 function formatDateToTimeIN(date:Date) {
-    console.log(date.toISOString() === new Date(0).toISOString());
     //console.log(new Date(date) == new Date(0));
     if (date.toISOString() == new Date(0).toISOString()) {
         return (<Button>
@@ -16,7 +15,7 @@ function formatDateToTimeIN(date:Date) {
     
 }
 function formatDateToTimeOUT(date:Date) {
-    console.log(date.toISOString() === new Date(0).toISOString());
+    //console.log(date.toISOString() === new Date(0).toISOString());
     //console.log(new Date(date) == new Date(0));
     if (date.toISOString() == new Date(0).toISOString()) {
         return (<Button>
@@ -31,7 +30,6 @@ function formatDateToTimeOUT(date:Date) {
 
 function TagReturnedEmpty(tagRet:boolean, tag:string) {
     var tagString = tagRet.toString();
-    console.log(tag);
     if (tagString == 'false' && tag == '') {
         return (<Button>Returned?</Button>)
     }
@@ -43,6 +41,14 @@ function TagReturnedEmpty(tagRet:boolean, tag:string) {
     }
 }
 
+function TagRender(tag:string) {
+    if (tag == '') {
+        return (<Button>Issue</Button>);
+    }
+    else {
+        return (tag);
+    }
+}
 
 function boolToString(bool:boolean) {
     return bool.toString();
@@ -62,7 +68,7 @@ function StaffInline(props: StaffInlineProps) {
                 <td>{staff.meetingRoom}</td>
                 <td>{formatDateToTimeIN(staff.timeIn)}</td>
                 <td>{formatDateToTimeOUT(staff.timeOut)}</td>
-                <td>{staff.tagIssue}</td>
+                <td>{TagRender(staff.tagIssue)}</td>
                 <td>{TagReturnedEmpty(staff.tagReturned, staff.tagIssue)}</td>
                 
             </tr>
