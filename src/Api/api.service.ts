@@ -12,7 +12,7 @@ export interface IStaff {
     department: string;
 }
 
-export interface DailyForm {
+export interface IDailyForm {
     form: {
         day:Date,
         id: number, 
@@ -41,7 +41,7 @@ const StaffRequests = {
 
 const DailyFormRequests = {
     get: (url:string) => http.get(url).then(responseBody),
-    post: (url:string, body:DailyForm) => http.post(url, body).then(responseBody)
+    post: (url:string, body:IDailyForm) => http.post(url, body).then(responseBody)
 }
 
 export const StaffApiService = {
@@ -49,14 +49,14 @@ export const StaffApiService = {
         console.log('res');
         return StaffRequests.get('/staff/all')},
     getStaffByID : (id:string) : Promise<IStaff> => StaffRequests.get(`/staff/${id}`),
-    getDay: (day:string) : Promise<DailyForm> => DailyFormRequests.get(`/daily_form/${day}`),
-    getAllDays: () : Promise<DailyForm[]> => {
+    getDay: (day:string) : Promise<IDailyForm> => DailyFormRequests.get(`/daily_form/${day}`),
+    getAllDays: () : Promise<IDailyForm[]> => {
         console.log('res');
         return DailyFormRequests.get('/daily_form/all_days')},
-    addRoom: (day_form:DailyForm) : Promise<DailyForm> => DailyFormRequests.post('/daily_form/room', day_form),
-    addTimeInOut: (day_form:DailyForm) : Promise<DailyForm> => DailyFormRequests.post('/daily_form/time', day_form),
-    addTag: (day_form:DailyForm): Promise<DailyForm> => DailyFormRequests.post('/daily_form/tag', day_form),
-    addTagRet: (day_form:DailyForm): Promise<DailyForm> => DailyFormRequests.post('/daily_form/tag_ret', day_form)
+    addRoom: (day_form:IDailyForm) : Promise<IDailyForm> => DailyFormRequests.post('/daily_form/room', day_form),
+    addTimeInOut: (day_form:IDailyForm) : Promise<IDailyForm> => DailyFormRequests.post('/daily_form/time', day_form),
+    addTag: (day_form:IDailyForm): Promise<IDailyForm> => DailyFormRequests.post('/daily_form/tag', day_form),
+    addTagRet: (day_form:IDailyForm): Promise<IDailyForm> => DailyFormRequests.post('/daily_form/tag_ret', day_form)
 
 };
 
