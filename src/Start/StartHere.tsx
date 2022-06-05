@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Container } from "react-bootstrap";
-import { StaffApiService, Staff, DailyForm } from "../Api/api.service";
+import { StaffApiService, IStaff, DailyForm } from "../Api/api.service";
 /* async function getResponse() {
     ApiService.getAllStaff().then(response => {
         console.log(response.data)

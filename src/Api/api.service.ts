@@ -1,11 +1,12 @@
 import { AxiosResponse } from "Axios";
+import { Staff } from "../Data/Staff";
 
 const axios = require('axios');
 
 
 /* from https://www.delftstack.com/howto/typescript/axios-typescript/ */
 
-export interface Staff {
+export interface IStaff {
     id: number,
     name: string,
     department: string;
@@ -44,10 +45,10 @@ const DailyFormRequests = {
 }
 
 export const StaffApiService = {
-    getAllStaff : () : Promise<Staff[]> => {
+    getAllStaff : () : Promise<IStaff[]> => {
         console.log('res');
         return StaffRequests.get('/staff/all')},
-    getStaffByID : (id:string) : Promise<Staff> => StaffRequests.get(`/staff/${id}`),
+    getStaffByID : (id:string) : Promise<IStaff> => StaffRequests.get(`/staff/${id}`),
     getDay: (day:string) : Promise<DailyForm> => DailyFormRequests.get(`/daily_form/${day}`),
     getAllDays: () : Promise<DailyForm[]> => {
         console.log('res');
