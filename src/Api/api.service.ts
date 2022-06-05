@@ -12,7 +12,15 @@ export interface Staff {
 }
 
 export interface DailyForm {
-    form: string[],
+    form: {
+        day:Date,
+        id: number, 
+        name: number, 
+        meetingRoom: string,
+        timeIn: Date,
+        timeOut: Date,
+        tagIssue: string,
+        tagReturned: boolean},
     name: string,
     department: string
 }
@@ -36,10 +44,14 @@ const DailyFormRequests = {
 }
 
 export const StaffApiService = {
-    getAllStaff : () : Promise<Staff[]> => StaffRequests.get('/staff/all'),
+    getAllStaff : () : Promise<Staff[]> => {
+        console.log('res');
+        return StaffRequests.get('/staff/all')},
     getStaffByID : (id:string) : Promise<Staff> => StaffRequests.get(`/staff/${id}`),
     getDay: (day:string) : Promise<DailyForm> => DailyFormRequests.get(`/daily_form/${day}`),
-    getAllDays: () : Promise<DailyForm[]> => DailyFormRequests.get('/daily_form/all_days'),
+    getAllDays: () : Promise<DailyForm[]> => {
+        console.log('res');
+        return DailyFormRequests.get('/daily_form/all_days')},
     addRoom: (day_form:DailyForm) : Promise<DailyForm> => DailyFormRequests.post('/daily_form/room', day_form),
     addTimeInOut: (day_form:DailyForm) : Promise<DailyForm> => DailyFormRequests.post('/daily_form/time', day_form),
     addTag: (day_form:DailyForm): Promise<DailyForm> => DailyFormRequests.post('/daily_form/tag', day_form),
