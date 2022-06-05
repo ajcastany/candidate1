@@ -8,9 +8,6 @@ function HomePage() {
         <div>
             <h1 className="display-1 text-center">Select one of the options bellow</h1>
             <Container>
-                <StartHere />
-            </Container>
-            <Container>
                 <Row className="justify-content-md-center my-top-margin">
                     <Col className='text-center'>
                     <Link className='display-3' to='admin'>
