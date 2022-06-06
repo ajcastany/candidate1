@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import { Button, Modal, ModalFooter } from "react-bootstrap";
+import { Button, Modal, ModalFooter, Form } from "react-bootstrap";
 
 interface TagModelProps {
     id: number | undefined,
@@ -11,16 +11,20 @@ interface TagModelProps {
 function TagModal(props: TagModelProps) {
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
-    const addTag = (tag:string) => {
-        console.log("Tag: " + tag + " ID: " + props.id);
-        return tag;
-    }
+    const [tagValue, setTagValue] = useState({
+        id: props.id,
+        tag: ''
+    });
 
+    function SubmitTagValue() {
+        console.log('id: ' + tagValue.id + " tag: " + tagValue.tag);
+        props.closeModal();
+    }
     
     return (
         <Modal
             show={props.showModal}
-            onHide={handleClose}
+            //onHide={props.closeModal()}
             backdrop="static"
             keyboard={false}
             cancel={() => props.closeModal()}
@@ -29,10 +33,18 @@ function TagModal(props: TagModelProps) {
                 <Modal.Title>Issue Tag</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                Issued tag number:
+                <Form>
+                    <Form.Group className="mb-3">
+                        <Form.Label>Enter Tag Number:</Form.Label>
+                        <Form.Control type="text"
+                            value={tagValue.tag}
+                            onChange={e => {setTagValue({id: tagValue.id, tag: e.target.value})}}
+                            />
+                    </Form.Group>
+                </Form>
             </Modal.Body>
             <ModalFooter>
-                <Button variant='primary' onClick={() => addTag("s")}>
+                <Button variant='primary' onClick={() => SubmitTagValue()}>
                     Issue
                 </Button>
                 <Button variant='secondary' onClick={() => props.closeModal()}>

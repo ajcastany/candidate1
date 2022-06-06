@@ -15,7 +15,7 @@ function StaffInline(props: StaffInlineProps) {
         console.log(showTagModal)
     }
     var showTag:boolean =false;
-    function ShowTagFunc() {}
+    let varl:string = '';
     const { staff } = props;
     
 
