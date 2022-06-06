@@ -26,10 +26,11 @@ function TagModal(props: TagModelProps) {
             show={props.showModal}
             backdrop="static"
             keyboard={false}
+            onHide={() => props.closeModal()}
             cancel={() => props.closeModal()}
 
             >
-            <Modal.Header>
+            <Modal.Header closeButton>
                 <Modal.Title>Issue Tag</Modal.Title>
             </Modal.Header>
             <Modal.Body>
