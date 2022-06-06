@@ -17,7 +17,13 @@ function TagModal(props: TagModelProps) {
     });
 
     function SubmitTagValue() {
-        console.log('id: ' + tagValue.id + " tag: " + tagValue.tag);
+        
+        if (props.id === tagValue.id) {
+            console.log('id: ' + tagValue.id + " tag: " + tagValue.tag);    
+        }
+        else {
+            console.log("Error on props.id");
+        }
         props.closeModal();
     }
     
