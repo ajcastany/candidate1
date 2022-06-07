@@ -12,7 +12,7 @@ export interface IStaff {
     department: string;
 }
 
-export interface IDailyForm {
+export interface IDailyFormNamDep {
     form: {
         day:Date,
         id: number, 
@@ -24,6 +24,17 @@ export interface IDailyForm {
         tagReturned: boolean},
     name: string,
     department: string
+}
+
+export interface IDailyForm {
+    day: Date,
+    id: number,
+    name: number,
+    room: string,
+    time_in: Date,
+    time_out: Date,
+    tag: string,
+    tag_ret: boolean
 }
 
 const http = axios.create({
@@ -49,8 +60,8 @@ export const StaffApiService = {
         console.log('res');
         return StaffRequests.get('/staff/all')},
     getStaffByID : (id:string) : Promise<IStaff> => StaffRequests.get(`/staff/${id}`),
-    getDay: (day:string) : Promise<IDailyForm> => DailyFormRequests.get(`/daily_form/${day}`),
-    getAllDays: () : Promise<IDailyForm[]> => {
+    getDay: (day:string) : Promise<IDailyFormNamDep> => DailyFormRequests.get(`/daily_form/${day}`),
+    getAllDays: () : Promise<IDailyFormNamDep[]> => {
         console.log('res');
         return DailyFormRequests.get('/daily_form/all_days')},
     addRoom: (day_form:IDailyForm) : Promise<IDailyForm> => DailyFormRequests.post('/daily_form/room', day_form),

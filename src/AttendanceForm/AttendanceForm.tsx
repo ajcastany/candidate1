@@ -1,11 +1,11 @@
 import React, {useState, useEffect} from "react";
 import AttendanceList from "./AttendanceList";
-import { StaffApiService, IDailyForm } from "../Api/api.service";
+import { StaffApiService, IDailyFormNamDep } from "../Api/api.service";
 import { Staff } from "../Data/Staff";
 
 import {MOCK_DATA} from "../Data/TEST/MockStaff"
 
-function BuildRowData(data:IDailyForm[]) {
+function BuildRowData(data:IDailyFormNamDep[]) {
     var staff_list:Staff[] = [];
     if (data.length == 0) {
         console.log("no data");
@@ -46,8 +46,8 @@ function BuildRowData(data:IDailyForm[]) {
 
 function AttendanceForm() {
     //console.log(JSON.stringify(MOCK_DATA, null, ''));
-    const  [daily_forms, setDailyForms]:[IDailyForm[], (
-        daily_forms: IDailyForm[]) => void] = useState<IDailyForm[]>([]);
+    const  [daily_forms, setDailyForms]:[IDailyFormNamDep[], (
+        daily_forms: IDailyFormNamDep[]) => void] = useState<IDailyFormNamDep[]>([]);
     useEffect( () => {
         StaffApiService.getAllDays().then((data) => setDailyForms(data));
     }, [])
