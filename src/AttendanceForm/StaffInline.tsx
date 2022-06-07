@@ -18,7 +18,9 @@ function StaffInline(props: StaffInlineProps) {
     let varl:string = '';
     const { staff } = props;
     
+    function updateRow(id:number) {
 
+    }
     function formatDateToTimeIN(date:Date) {
         //console.log(new Date(date) == new Date(0));
         if (date.toISOString() == new Date(0).toISOString()) {
@@ -52,20 +54,25 @@ function StaffInline(props: StaffInlineProps) {
             return (<Button>Returned?</Button>)
         }
         if (tagString == 'false') {
-            return ""
+            return (<Button>Returned?</Button>)
         }
         if (tagString == 'true') {
-            return 
+            return tagRet
         }
     }
 
     function TagRender(tag:string) {
         if (tag == '') {
+            //console.log("tag not available: " + tag);
             return (<Button variant='primary' 
             onClick={showTagModel}>Issue</Button>);
         }
         else {
-            return (tag);
+            console.log("should render");
+            return (
+                <>{tag} <Button variant='secondary' size="sm"
+                onClick={showTagModel}>Edit</Button></>
+                );
         }
     }
 
@@ -78,12 +85,19 @@ function StaffInline(props: StaffInlineProps) {
         return false;
     }
 
+    function UpdateComponent(id: number | undefined) {
+        console.log("this id: " + id);
+    }
+
 //const showModal = () => {}
 
 
     return (
         <React.Fragment>
-            <TagModal id={staff.id} showModal={showTagModal} closeModal={() => CloseModal()}
+            <TagModal id={staff.id} 
+            showModal={showTagModal} 
+            closeModal={() => CloseModal()} 
+            updateParent={UpdateComponent}
             />
             <tr>
                 <th scope='row'>{staff.id}</th>

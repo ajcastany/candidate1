@@ -6,7 +6,8 @@ import {StaffApiService, IDailyForm} from "../Api/api.service"
 interface TagModelProps {
     id: number | undefined,
     showModal: boolean,
-    closeModal: () => boolean
+    closeModal: () => boolean,
+    updateParent: (id:number | undefined) => void
 }
 
 function TagModal(props: TagModelProps) {
@@ -30,15 +31,15 @@ function TagModal(props: TagModelProps) {
                 tag: tagValue.tag,
                 tag_ret: false
                 }
-            console.log(data);
             var dataTXT = JSON.stringify(data)
             var dataJSON = JSON.parse(dataTXT);
 
-            StaffApiService.addTagJSON(dataJSON);
+            StaffApiService.addTagJSON(dataJSON).then( res => props.updateParent(props.id));
         }
         else {
             console.log("Error on props.id");
         }
+        
         props.closeModal();
     }
     
@@ -48,7 +49,7 @@ function TagModal(props: TagModelProps) {
             backdrop="static"
             keyboard={false}
             onHide={() => props.closeModal()}
-            cancel={() => props.closeModal()}
+            close={() => props.closeModal()}
 
             >
             <Modal.Header closeButton>

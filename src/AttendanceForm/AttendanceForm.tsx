@@ -20,23 +20,24 @@ function BuildRowData(data:IDailyFormNamDep[]) {
         }
     }
 
-    console.log(data);
+    //console.log(data);
     //var dataJSON = JSON.stringify(data);
     //console.log(dataJSON);
 
     data.forEach(element => {
         var elementTXT = JSON.stringify(element);
         var elementJSON = JSON.parse(elementTXT);
+        console.log(elementJSON);
         CheckDateNotNull(elementJSON[0].timeIn);
          var staff:Staff = new Staff({
             id: elementJSON[0].id,
             name: elementJSON[1],
             department: elementJSON[2],
-            meetingRoom: elementJSON[0].meetingRoom,
-            timeIn:  CheckDateNotNull(elementJSON[0].timeIn),
-            timeOut: CheckDateNotNull(elementJSON[0].timeOut),
-            tagIssue: elementJSON[0].tagIssue,
-            tagReturned: elementJSON[0].tagReturned
+            meetingRoom: elementJSON[0].room,
+            timeIn:  CheckDateNotNull(elementJSON[0].time_in),
+            timeOut: CheckDateNotNull(elementJSON[0].time_out),
+            tagIssue: elementJSON[0].tag,
+            tagReturned: elementJSON[0].tag_ret
         });
         staff_list.push(staff);
     });
