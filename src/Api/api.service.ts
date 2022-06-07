@@ -59,11 +59,12 @@ export const StaffApiService = {
     getAllStaff : () : Promise<IStaff[]> => {
         console.log('res');
         return StaffRequests.get('/staff/all')},
-    getStaffByID : (id:number) : Promise<IStaff> => StaffRequests.get(`/staff/${id}`),
+    getStaffByID : (id:number | undefined) : Promise<IStaff> => StaffRequests.get(`/staff/${id}`),
     getDay: (day:string) : Promise<IDailyFormNamDep> => DailyFormRequests.get(`/daily_form/${day}`),
     getAllDays: () : Promise<IDailyFormNamDep[]> => {
         console.log('res');
         return DailyFormRequests.get('/daily_form/all_days')},
+    getDayById: (id: number | undefined) : Promise<IDailyFormNamDep> => DailyFormRequests.get(`/daily_form/${id}`),
     addRoom: (day_form:IDailyForm) : Promise<IDailyForm> => DailyFormRequests.post('/daily_form/room', day_form),
     addTimeInOut: (day_form:IDailyForm) : Promise<IDailyForm> => DailyFormRequests.post('/daily_form/time', day_form),
     addTag: (day_form:IDailyForm): Promise<IDailyForm> => DailyFormRequests.post('/daily_form/tag', day_form),

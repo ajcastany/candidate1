@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import { Button } from "react-bootstrap";
 import {Staff} from '../Data/Staff';
 import TagModal from '../AttendanceForm/TagModal';
+import {StaffApiService, IDailyFormNamDep} from "../Api/api.service"
 
 
 interface StaffInlineProps {
@@ -14,13 +15,13 @@ function StaffInline(props: StaffInlineProps) {
         setTagModal(true);
         console.log(showTagModal)
     }
+
     var showTag:boolean =false;
     let varl:string = '';
-    const { staff } = props;
-    
-    function updateRow(id:number) {
+    var { staff } = props;
+    const [staffState, setStaffForm]:[Staff, (
+        staff: Staff) => void ] = useState(staff);
 
-    }
     function formatDateToTimeIN(date:Date) {
         //console.log(new Date(date) == new Date(0));
         if (date.toISOString() == new Date(0).toISOString()) {
@@ -85,8 +86,33 @@ function StaffInline(props: StaffInlineProps) {
         return false;
     }
 
-    function UpdateComponent(id: number | undefined) {
+  function UpdateComponent(id: number | undefined) {
         console.log("this id: " + id);
+        var staff:Staff = new Staff();
+/*         function useForceUpdate() {
+            const [value, setvalue] = useState(0);
+            return () => setvalue(value => value+1);
+        } */
+        function BuildNewStaff(data:IDailyFormNamDep) {
+            var dataTXT = JSON.stringify(data)
+            var dataJSON = JSON.parse(dataTXT)
+            staff.id = dataJSON[0].id;
+            staff.name = dataJSON[1];
+            staff.department = dataJSON[2];
+            staff.meetingRoom = dataJSON[0].room
+            staff.timeIn = (dataJSON[0].time_in == undefined) ? new Date(0) : dataJSON[0].time_in 
+            staff.timeOut = (dataJSON[0].time_out == undefined) ? new Date(0) : dataJSON[0].time_out
+            staff.tagIssue = dataJSON[0].tag
+            staff.tagReturned = dataJSON[0].tag_ret
+
+            return staff
+        }
+        StaffApiService.getDayById(id).then((data) => staff = BuildNewStaff(data)); 
+        //Addeffect here? update staff const
+        let staffInline:StaffInlineProps = {staff};
+        
+        //staffInline.staff = staff;
+        setStaffForm(staffInline);
     }
 
 //const showModal = () => {}
@@ -94,20 +120,20 @@ function StaffInline(props: StaffInlineProps) {
 
     return (
         <React.Fragment>
-            <TagModal id={staff.id} 
+            <TagModal id={staffState.staff.id} 
             showModal={showTagModal} 
             closeModal={() => CloseModal()} 
             updateParent={UpdateComponent}
             />
             <tr>
-                <th scope='row'>{staff.id}</th>
-                <td>{staff.name}</td>
-                <td>{staff.department}</td>
-                <td>{staff.meetingRoom}</td>
-                <td>{formatDateToTimeIN(staff.timeIn)}</td>
-                <td>{formatDateToTimeOUT(staff.timeOut)}</td>
-                <td>{TagRender(staff.tagIssue)}</td>
-                <td>{TagReturnedEmpty(staff.tagReturned, staff.tagIssue)}</td>
+                <th scope='row'>{staffState.staff.id}</th>
+                <td>{staffState.staff.name}</td>
+                <td>{staffState.staff.department}</td>
+                <td>{staffState.staff.meetingRoom}</td>
+                <td>{formatDateToTimeIN(staffState.staff.timeIn)}</td>
+                <td>{formatDateToTimeOUT(staffState.staff.timeOut)}</td>
+                <td>{TagRender(staffState.staff.tagIssue)}</td>
+                <td>{TagReturnedEmpty(staffState.staff.tagReturned, staffState.staff.tagIssue)}</td>
                 
             </tr>
         </React.Fragment>
