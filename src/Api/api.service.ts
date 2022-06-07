@@ -59,7 +59,7 @@ export const StaffApiService = {
     getAllStaff : () : Promise<IStaff[]> => {
         console.log('res');
         return StaffRequests.get('/staff/all')},
-    getStaffByID : (id:string) : Promise<IStaff> => StaffRequests.get(`/staff/${id}`),
+    getStaffByID : (id:number) : Promise<IStaff> => StaffRequests.get(`/staff/${id}`),
     getDay: (day:string) : Promise<IDailyFormNamDep> => DailyFormRequests.get(`/daily_form/${day}`),
     getAllDays: () : Promise<IDailyFormNamDep[]> => {
         console.log('res');
