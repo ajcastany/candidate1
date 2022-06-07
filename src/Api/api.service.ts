@@ -28,7 +28,7 @@ export interface IDailyFormNamDep {
 
 export interface IDailyForm {
     day: Date,
-    id: number,
+    id: number | undefined,
     name: number,
     room: string,
     time_in: Date,
@@ -67,6 +67,7 @@ export const StaffApiService = {
     addRoom: (day_form:IDailyForm) : Promise<IDailyForm> => DailyFormRequests.post('/daily_form/room', day_form),
     addTimeInOut: (day_form:IDailyForm) : Promise<IDailyForm> => DailyFormRequests.post('/daily_form/time', day_form),
     addTag: (day_form:IDailyForm): Promise<IDailyForm> => DailyFormRequests.post('/daily_form/tag', day_form),
+    addTagJSON: (data:IDailyForm): Promise<JSON> => DailyFormRequests.post('/daily_form/tag', data),
     addTagRet: (day_form:IDailyForm): Promise<IDailyForm> => DailyFormRequests.post('/daily_form/tag_ret', day_form)
 
 };

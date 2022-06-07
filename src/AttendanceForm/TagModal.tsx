@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { Button, Modal, ModalFooter, Form } from "react-bootstrap";
+import {StaffApiService, IDailyForm} from "../Api/api.service"
 
 interface TagModelProps {
     id: number | undefined,
@@ -19,7 +20,21 @@ function TagModal(props: TagModelProps) {
     function SubmitTagValue() {
         
         if (props.id === tagValue.id) {
-            console.log('id: ' + tagValue.id + " tag: " + tagValue.tag);    
+            //console.log('id: ' + tagValue.id + " tag: " + tagValue.tag);    
+            const data:IDailyForm = {day: new Date(0),
+                id:tagValue.id,
+                name: 0,
+                room: '',
+                time_in: new Date(0),
+                time_out: new Date(0),
+                tag: tagValue.tag,
+                tag_ret: false
+                }
+            console.log(data);
+            var dataTXT = JSON.stringify(data)
+            var dataJSON = JSON.parse(dataTXT);
+
+            StaffApiService.addTagJSON(dataJSON);
         }
         else {
             console.log("Error on props.id");
