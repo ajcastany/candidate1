@@ -16,15 +16,13 @@ function StaffInline(props: StaffInlineProps) {
         console.log(showTagModal)
     }
 
-    var showTag:boolean =false;
-    let varl:string = '';
     var { staff } = props;
     const [staffState, setStaffForm]:[StaffInlineProps, (
         staffState: StaffInlineProps) => void ] = useState({staff});
 
     function formatDateToTimeIN(date:Date) {
         //console.log(new Date(date) == new Date(0));
-        if (date.toISOString() == new Date(0).toISOString()) {
+        if (date.toISOString() === new Date(0).toISOString()) {
             return (<Button>
                 IN
             </Button>);
@@ -37,7 +35,7 @@ function StaffInline(props: StaffInlineProps) {
     function formatDateToTimeOUT(date:Date) {
         //console.log(date.toISOString() === new Date(0).toISOString());
         //console.log(new Date(date) == new Date(0));
-        if (date.toISOString() == new Date(0).toISOString()) {
+        if (date.toISOString() === new Date(0).toISOString()) {
             return (<Button>
                 OUT
             </Button>);
@@ -51,13 +49,13 @@ function StaffInline(props: StaffInlineProps) {
 
     function TagReturnedEmpty(tagRet:boolean, tag:string) {
         var tagString = tagRet.toString();
-        if (tagString == 'false' && tag == '') {
+        if (tagString == 'false' && tag === '') {
             return (<Button>Returned?</Button>)
         }
         if (tagString == 'false') {
             return (<Button>Returned?</Button>)
         }
-        if (tagString == 'true') {
+        if (tagString === 'true') {
             return tagRet
         }
     }
@@ -77,22 +75,13 @@ function StaffInline(props: StaffInlineProps) {
         }
     }
 
-    function boolToString(bool:boolean) {
-        return bool.toString();
-    }
-
     function CloseModal(){
         setTagModal(false);
         return false;
     }
     
   function UpdateComponent(id: number | undefined) {
-        console.log("this id: " + id);
-        
-/*         function useForceUpdate() {
-            const [value, setvalue] = useState(0);
-            return () => setvalue(value => value+1);
-        } */
+
         function ParseJSON(data:IDailyFormNamDep) {
             
             var dataTXT = JSON.stringify(data);
@@ -110,30 +99,9 @@ function StaffInline(props: StaffInlineProps) {
             let staffInline:StaffInlineProps = {staff};
             setStaffForm(staffInline);
         }
-/*         function BuildNewStaff(dataJSON:JSON) {
-            staff.id = dataJSON.id;
-            staff.name = dataJSON.name_dep.staff_name;
-            staff.department = dataJSON.name_dep.staff_dept;
-            staff.meetingRoom = dataJSON.room
-            staff.timeIn = (dataJSON.time_in == undefined) ? new Date(0) : dataJSON[0].time_in 
-            staff.timeOut = (dataJSON.time_out == undefined) ? new Date(0) : dataJSON[0].time_out
-            staff.tagIssue = dataJSON.tag
-            staff.tagReturned = dataJSON.tag_ret
-
-            return staff
-        } */
-        //StaffApiService.getDayById(id).then((data) => staff = BuildNewStaff(data)); 
+        
         StaffApiService.getDayById(id).then((data) => ParseJSON(data));
-        //Addeffect here? update staff const
-        
-       
-        
-        //staffInline.staff = staff;
-
     }
-
-//const showModal = () => {}
-
 
     return (
         <React.Fragment>
