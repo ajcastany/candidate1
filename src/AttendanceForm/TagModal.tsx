@@ -11,8 +11,6 @@ interface TagModelProps {
 }
 
 function TagModal(props: TagModelProps) {
-    const [show, setShow] = useState(false);
-    const handleClose = () => setShow(false);
     const [tagValue, setTagValue] = useState({
         id: props.id,
         tag: ''
