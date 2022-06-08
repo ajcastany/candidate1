@@ -88,34 +88,48 @@ function StaffInline(props: StaffInlineProps) {
     
   function UpdateComponent(id: number | undefined) {
         console.log("this id: " + id);
-        var staff:Staff = new Staff();
+        
 /*         function useForceUpdate() {
             const [value, setvalue] = useState(0);
             return () => setvalue(value => value+1);
         } */
-        function BuildNewStaff(data:JSON) {
+        function ParseJSON(data:IDailyFormNamDep) {
+            
             var dataTXT = JSON.stringify(data);
             var dataJSON = JSON.parse(dataTXT);
-            console.log("json text: " + dataTXT);
-            console.log("triggered" + data);
-            staff.id = dataJSON[0].id;
-            staff.name = dataJSON[1];
-            staff.department = dataJSON[2];
-            staff.meetingRoom = dataJSON[0].room
-            staff.timeIn = (dataJSON[0].time_in == undefined) ? new Date(0) : dataJSON[0].time_in 
-            staff.timeOut = (dataJSON[0].time_out == undefined) ? new Date(0) : dataJSON[0].time_out
-            staff.tagIssue = dataJSON[0].tag
-            staff.tagReturned = dataJSON[0].tag_ret
+            console.log(dataJSON.id);
+            var staff:Staff = new Staff({
+            id: dataJSON.id,
+            name: dataJSON.name_dep.staff_name,
+            department: dataJSON.name_dep.staff_dept,
+            meetingRoom: dataJSON.room,
+            timeIn: (dataJSON.time_in == undefined) ? new Date(0) : dataJSON[0].time_in,
+            timeOut:(dataJSON.time_out == undefined) ? new Date(0) : dataJSON[0].time_out,
+            tagIssue: dataJSON.tag,
+            tagReturned: dataJSON.tag_ret});
+            let staffInline:StaffInlineProps = {staff};
+            setStaffForm(staffInline);
+        }
+/*         function BuildNewStaff(dataJSON:JSON) {
+            staff.id = dataJSON.id;
+            staff.name = dataJSON.name_dep.staff_name;
+            staff.department = dataJSON.name_dep.staff_dept;
+            staff.meetingRoom = dataJSON.room
+            staff.timeIn = (dataJSON.time_in == undefined) ? new Date(0) : dataJSON[0].time_in 
+            staff.timeOut = (dataJSON.time_out == undefined) ? new Date(0) : dataJSON[0].time_out
+            staff.tagIssue = dataJSON.tag
+            staff.tagReturned = dataJSON.tag_ret
 
             return staff
-        }
-        StaffApiService.getDayById(id).then((data) => staff = BuildNewStaff(data)); 
+        } */
+        //StaffApiService.getDayById(id).then((data) => staff = BuildNewStaff(data)); 
+        StaffApiService.getDayById(id).then((data) => ParseJSON(data));
         //Addeffect here? update staff const
         
-        let staffInline:StaffInlineProps = {staff};
+       
         
         //staffInline.staff = staff;
-        setStaffForm(staffInline);
+
     }
 
 //const showModal = () => {}
