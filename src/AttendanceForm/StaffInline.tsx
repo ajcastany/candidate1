@@ -19,8 +19,8 @@ function StaffInline(props: StaffInlineProps) {
     var showTag:boolean =false;
     let varl:string = '';
     var { staff } = props;
-    const [staffState, setStaffForm]:[Staff, (
-        staff: Staff) => void ] = useState(staff);
+    const [staffState, setStaffForm]:[StaffInlineProps, (
+        staffState: StaffInlineProps) => void ] = useState({staff});
 
     function formatDateToTimeIN(date:Date) {
         //console.log(new Date(date) == new Date(0));

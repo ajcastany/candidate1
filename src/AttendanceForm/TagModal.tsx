@@ -33,8 +33,11 @@ function TagModal(props: TagModelProps) {
                 }
             var dataTXT = JSON.stringify(data)
             var dataJSON = JSON.parse(dataTXT);
-
-            StaffApiService.addTagJSON(dataJSON).then( res => props.updateParent(props.id));
+            console.log(dataJSON);
+            StaffApiService.addTagJSON(dataJSON).then(
+                res => {
+                    console.log(res);
+                    props.updateParent(props.id)});
         }
         else {
             console.log("Error on props.id");
@@ -49,7 +52,7 @@ function TagModal(props: TagModelProps) {
             backdrop="static"
             keyboard={false}
             onHide={() => props.closeModal()}
-            close={() => props.closeModal()}
+            cancel={() => props.closeModal()}
 
             >
             <Modal.Header closeButton>
