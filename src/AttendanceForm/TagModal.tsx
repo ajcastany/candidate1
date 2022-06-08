@@ -1,4 +1,4 @@
-import React from "react";
+import React, { SyntheticEvent } from "react";
 import { useState } from "react";
 import { Button, Modal, ModalFooter, Form } from "react-bootstrap";
 import {StaffApiService, IDailyForm} from "../Api/api.service"
@@ -18,8 +18,8 @@ function TagModal(props: TagModelProps) {
         tag: ''
     });
 
-    function SubmitTagValue() {
-        
+    const SubmitTagValue = (event:SyntheticEvent)  => {
+        event.preventDefault();
         if (props.id === tagValue.id) {
             //console.log('id: ' + tagValue.id + " tag: " + tagValue.tag);    
             const data:IDailyForm = {day: new Date(0),
@@ -58,26 +58,28 @@ function TagModal(props: TagModelProps) {
             <Modal.Header closeButton>
                 <Modal.Title>Issue Tag</Modal.Title>
             </Modal.Header>
+            <Form onSubmit={SubmitTagValue}>
             <Modal.Body>
-                <Form>
+            
                     <Form.Group className="mb-3">
                         <Form.Label>Enter Tag Number:</Form.Label>
-                        <Form.Control type="text"
+                        <Form.Control type="input"
                             value={tagValue.tag}
                             onChange={e => {setTagValue({id: tagValue.id, tag: e.target.value})}}
+
                             />
                     </Form.Group>
-                </Form>
+                    
             </Modal.Body>
             <ModalFooter>
-                <Button variant='primary' onClick={() => SubmitTagValue()}>
+                <Button variant='primary' type="submit">
                     Issue
                 </Button>
                 <Button variant='secondary' onClick={() => props.closeModal()}>
                     Close
                 </Button>
             </ModalFooter>
-
+            </Form>    
         </Modal>
     );
 }
