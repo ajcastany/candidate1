@@ -56,6 +56,7 @@ const DailyFormRequests = {
 }
 
 const tagRequest  = {
+    get: (url:string) => http.get(url).then(responseBody),
     post: (url:string, body:JSON) => http.post(url, body).then(responseBody)
 }
 
@@ -68,7 +69,7 @@ export const StaffApiService = {
     getAllDays: () : Promise<IDailyFormNamDep[]> => {
         console.log('res');
         return DailyFormRequests.get('/daily_form/all_days')},
-    getDayById: (id: number | undefined) : Promise<IDailyFormNamDep> => DailyFormRequests.get(`/daily_form/${id}`),
+    getDayById: (id: number | undefined) : Promise<JSON> => tagRequest.get(`/daily_form/row/${id}`),
     addRoom: (day_form:IDailyForm) : Promise<IDailyForm> => DailyFormRequests.post('/daily_form/room', day_form),
     addTimeInOut: (day_form:IDailyForm) : Promise<IDailyForm> => DailyFormRequests.post('/daily_form/time', day_form),
     addTag: (day_form:IDailyForm): Promise<IDailyForm> => DailyFormRequests.post('/daily_form/tag', day_form),

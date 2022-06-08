@@ -85,7 +85,7 @@ function StaffInline(props: StaffInlineProps) {
         setTagModal(false);
         return false;
     }
-
+    
   function UpdateComponent(id: number | undefined) {
         console.log("this id: " + id);
         var staff:Staff = new Staff();
@@ -93,9 +93,11 @@ function StaffInline(props: StaffInlineProps) {
             const [value, setvalue] = useState(0);
             return () => setvalue(value => value+1);
         } */
-        function BuildNewStaff(data:IDailyFormNamDep) {
-            var dataTXT = JSON.stringify(data)
-            var dataJSON = JSON.parse(dataTXT)
+        function BuildNewStaff(data:JSON) {
+            var dataTXT = JSON.stringify(data);
+            var dataJSON = JSON.parse(dataTXT);
+            console.log("json text: " + dataTXT);
+            console.log("triggered" + data);
             staff.id = dataJSON[0].id;
             staff.name = dataJSON[1];
             staff.department = dataJSON[2];
@@ -109,6 +111,7 @@ function StaffInline(props: StaffInlineProps) {
         }
         StaffApiService.getDayById(id).then((data) => staff = BuildNewStaff(data)); 
         //Addeffect here? update staff const
+        
         let staffInline:StaffInlineProps = {staff};
         
         //staffInline.staff = staff;

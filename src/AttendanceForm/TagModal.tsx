@@ -33,7 +33,7 @@ function TagModal(props: TagModelProps) {
                 }
             var dataTXT = JSON.stringify(data)
             var dataJSON = JSON.parse(dataTXT);
-            console.log(dataJSON);
+            //console.log(dataJSON);
             StaffApiService.addTagJSON(dataJSON).then(
                 res => {
                     console.log(res);
