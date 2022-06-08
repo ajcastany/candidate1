@@ -19,14 +19,15 @@ function TagModal(props: TagModelProps) {
     const SubmitTagValue = (event:SyntheticEvent)  => {
         event.preventDefault();
         if (props.id === tagValue.id) {
-            //console.log('id: ' + tagValue.id + " tag: " + tagValue.tag);    
+            //console.log('id: ' + tagValue.id + " tag: " + tagValue.tag);
+            let tagSubString:string = tagValue.tag.substring(0,10);
             const data:IDailyForm = {day: new Date(0),
                 id:tagValue.id,
                 name: 0,
                 room: '',
                 time_in: new Date(0),
                 time_out: new Date(0),
-                tag: tagValue.tag,
+                tag: tagSubString,
                 tag_ret: false
                 }
             var dataTXT = JSON.stringify(data)
