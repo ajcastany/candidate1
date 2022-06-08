@@ -28,16 +28,16 @@ function BuildRowData(data:IDailyFormNamDep[]) {
         var elementTXT = JSON.stringify(element);
         var elementJSON = JSON.parse(elementTXT);
         console.log(elementJSON);
-        CheckDateNotNull(elementJSON[0].timeIn);
+        CheckDateNotNull(elementJSON.timeIn);
          var staff:Staff = new Staff({
-            id: elementJSON[0].id,
-            name: elementJSON[1],
-            department: elementJSON[2],
-            meetingRoom: elementJSON[0].room,
-            timeIn:  CheckDateNotNull(elementJSON[0].time_in),
-            timeOut: CheckDateNotNull(elementJSON[0].time_out),
-            tagIssue: elementJSON[0].tag,
-            tagReturned: elementJSON[0].tag_ret
+            id: elementJSON.id,
+            name: elementJSON.name_dep.staff_name,
+            department: elementJSON.name_dep.staff_dept,
+            meetingRoom: elementJSON.room,
+            timeIn:  CheckDateNotNull(elementJSON.time_in),
+            timeOut: CheckDateNotNull(elementJSON.time_out),
+            tagIssue: elementJSON.tag,
+            tagReturned: elementJSON.tag_ret
         });
         staff_list.push(staff);
     });
