@@ -28,21 +28,21 @@ function StaffInline(props: StaffInlineProps) {
         console.log(time);
         console.log(timeStr);
         let data:IDailyForm ={
-            day: props.staff.day,
-            id: props.staff.id,
+            day: staffState.staff.day,
+            id: staffState.staff.id,
             name: 0,
             room: '',
             time_in: timeStr,
-            time_out: props.staff.timeOut,
-            tag: props.staff.tagIssue,
-            tag_ret:props.staff.tagReturned
+            time_out: staffState.staff.timeOut,
+            tag: staffState.staff.tagIssue,
+            tag_ret: staffState.staff.tagReturned
         }
         var dataTXT = JSON.stringify(data);
         var dataJSON = JSON.parse(dataTXT);
         StaffApiService.addTimeInOutJSON(dataJSON).then (
             res => {
                 console.log(res);
-                UpdateComponent(props.staff.id);
+                UpdateComponent(staffState.staff.id);
             }
         )
         console.log(time);
@@ -62,7 +62,7 @@ function StaffInline(props: StaffInlineProps) {
             </Button>);
         }
         else {
-            let timeINFormat = props.staff.timeIn.substring(0, 5);
+            let timeINFormat = staffState.staff.timeIn.substring(0, 5);
             return timeINFormat;
             //return new Date(date).toLocaleTimeString('en-GB', {hour: '2-digit', minute: '2-digit'});
         } 
@@ -77,7 +77,8 @@ function StaffInline(props: StaffInlineProps) {
             </Button>);
         }
         else {
-            let timeOutFormat = props.staff.timeIn.substring(0,5);
+            console.log(props.staff);
+            let timeOutFormat = staffState.staff.timeIn.substring(0,5);
             return timeOutFormat;
             //return new Date(date).toLocaleTimeString('en-GB', {hour: '2-digit', minute: '2-digit'});
         } 
@@ -136,7 +137,7 @@ function StaffInline(props: StaffInlineProps) {
             tagReturned: dataJSON.tag_ret});
 
             let staffInline:StaffInlineProps = {staff};
-            console.log(staffInline.toString());
+            console.log(staffInline.staff.timeIn.toString());
             setStaffForm(staffInline);
         }
         
