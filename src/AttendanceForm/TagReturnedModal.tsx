@@ -1,6 +1,6 @@
 import React from 'react';
 import {useState} from 'react';
-import {Button, Modal, ModalFooter, Form} from 'react-bootstrap';
+import {Button, Modal, ModalFooter, Form, ButtonGroup} from 'react-bootstrap';
 import { StaffApiService, IDailyForm } from '../Api/api.service';
 
 interface TagReturnedProps {
@@ -31,13 +31,17 @@ function TagReturnedModal(props: TagReturnedProps) {
             <Modal.Body>
                 Did you return Tag {props.tag}?
             </Modal.Body>
-            <ModalFooter>
-                <Button variant="success" onClick={YesTagReturned}>
-                    Yes
-                </Button>
-                <Button variant="danger" onClick={NoTagReturned}>
-                    No
-                </Button>
+            <ModalFooter className='justify-content-between'>
+                <ButtonGroup >
+                    <Button variant="success" size='lg' onClick={YesTagReturned}>
+                        Yes
+                    </Button>
+                </ButtonGroup>
+                <ButtonGroup>
+                    <Button variant="danger" size='lg' onClick={NoTagReturned}>
+                        No
+                    </Button>
+                </ButtonGroup>
             </ModalFooter>
         </Modal>
     )

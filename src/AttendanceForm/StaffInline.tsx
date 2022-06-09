@@ -14,6 +14,11 @@ interface StaffInlineProps {
 
 function StaffInline(props: StaffInlineProps) {
     const [showTagModal, setTagModal] = useState(false);
+    const [showTagReturnedModal, setTagReturnedModal] = useState(false);
+    const showTagReturnedModel = () => {
+        setTagReturnedModal(true);
+        console.log("show tag returned: true");
+    }
     const showTagModel = () => {
         setTagModal(true);
         console.log(showTagModal)
@@ -135,8 +140,13 @@ function StaffInline(props: StaffInlineProps) {
         }
     }
 
-    function CloseModal(){
+    function CloseTagModal(){
         setTagModal(false);
+        return false;
+    }
+
+    function CloseTagReturnedModal() {
+        setTagReturnedModal(false);
         return false;
     }
     
@@ -169,12 +179,13 @@ function StaffInline(props: StaffInlineProps) {
         <React.Fragment>
             <TagModal id={staffState.staff.id} 
             showModal={showTagModal} 
-            closeModal={() => CloseModal()} 
+            closeModal={() => CloseTagModal()} 
             updateParent={UpdateComponent}
             />
             <TagReturnedModal id={staffState.staff.id}
+            //Change this to hook showTagReturnedModal when done debuggin'
             showModal={true}
-            closeModal={() => false}
+            closeModal={() => CloseTagReturnedModal()}
             tag={staffState.staff.tagIssue}
             />
             <tr>
