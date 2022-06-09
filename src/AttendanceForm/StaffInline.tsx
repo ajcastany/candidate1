@@ -2,12 +2,14 @@ import React, {useState} from "react";
 import { Button } from "react-bootstrap";
 import {Staff} from '../Data/Staff';
 import TagModal from '../AttendanceForm/TagModal';
-import {StaffApiService, IDailyFormNamDep} from "../Api/api.service"
+import {StaffApiService, IDailyFormNamDep, IDailyForm} from "../Api/api.service"
 
 
 interface StaffInlineProps {
     staff: Staff;
 }
+
+
 
 function StaffInline(props: StaffInlineProps) {
     const [showTagModal, setTagModal] = useState(false);
@@ -20,10 +22,30 @@ function StaffInline(props: StaffInlineProps) {
     const [staffState, setStaffForm]:[StaffInlineProps, (
         staffState: StaffInlineProps) => void ] = useState({staff});
 
+    function SubmitTimeInValue() {
+        var time = new Date();
+        let data:IDailyForm ={
+            day: props.staff.day,
+            id: props.staff.id,
+            name: 0,
+            room: '',
+            time_in: time,
+            time_out: props.staff.timeOut,
+            tag: props.staff.tagIssue,
+            tag_ret:props.staff.tagReturned
+        }
+        console.log(time);
+        }
+        
+    function SubmitTimeOutValue() {
+        var time = new Date();
+        console.log(time);
+            
+        }
     function formatDateToTimeIN(date:Date) {
         //console.log(new Date(date) == new Date(0));
         if (date.toISOString() === new Date(0).toISOString()) {
-            return (<Button>
+            return (<Button onClick={SubmitTimeInValue}>
                 IN
             </Button>);
         }
@@ -36,7 +58,7 @@ function StaffInline(props: StaffInlineProps) {
         //console.log(date.toISOString() === new Date(0).toISOString());
         //console.log(new Date(date) == new Date(0));
         if (date.toISOString() === new Date(0).toISOString()) {
-            return (<Button>
+            return (<Button onClick={SubmitTimeOutValue}>
                 OUT
             </Button>);
         }
