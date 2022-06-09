@@ -25,8 +25,8 @@ function TagModal(props: TagModelProps) {
                 id:tagValue.id,
                 name: 0,
                 room: '',
-                time_in: new Date(0),
-                time_out: new Date(0),
+                time_in: new Date(0).toISOString(),
+                time_out: new Date(0).toISOString(),
                 tag: tagSubString,
                 tag_ret: false
                 }

@@ -23,7 +23,7 @@ function StaffInline(props: StaffInlineProps) {
         staffState: StaffInlineProps) => void ] = useState({staff});
 
     function SubmitTimeInValue() {
-        var time = new Date();
+        var time = new Date().toISOString();
         let data:IDailyForm ={
             day: props.staff.day,
             id: props.staff.id,
@@ -36,7 +36,7 @@ function StaffInline(props: StaffInlineProps) {
         }
         var dataTXT = JSON.stringify(data);
         var dataJSON = JSON.parse(dataTXT);
-        StaffApiService.addTimeInOut(dataJSON).then (
+        StaffApiService.addTimeInOutJSON(dataJSON).then (
             res => {
                 console.log(res);
                 UpdateComponent(props.staff.id);
@@ -50,9 +50,10 @@ function StaffInline(props: StaffInlineProps) {
         console.log(time);
             
         }
-    function formatDateToTimeIN(date:Date) {
+    function formatDateToTimeIN(date:string) {
         //console.log(new Date(date) == new Date(0));
-        if (date.toISOString() === new Date(0).toISOString()) {
+        console.log(date);
+        if (date === new Date(0).toISOString()) {
             return (<Button onClick={SubmitTimeInValue}>
                 IN
             </Button>);
@@ -62,10 +63,10 @@ function StaffInline(props: StaffInlineProps) {
         } 
         
     }
-    function formatDateToTimeOUT(date:Date) {
+    function formatDateToTimeOUT(date:string) {
         //console.log(date.toISOString() === new Date(0).toISOString());
         //console.log(new Date(date) == new Date(0));
-        if (date.toISOString() === new Date(0).toISOString()) {
+        if (date === new Date(0).toISOString()) {
             return (<Button onClick={SubmitTimeOutValue}>
                 OUT
             </Button>);
@@ -122,8 +123,8 @@ function StaffInline(props: StaffInlineProps) {
             name: dataJSON.name_dep.staff_name,
             department: dataJSON.name_dep.staff_dept,
             meetingRoom: dataJSON.room,
-            timeIn: (dataJSON.time_in == undefined) ? new Date(0) : dataJSON[0].time_in,
-            timeOut:(dataJSON.time_out == undefined) ? new Date(0) : dataJSON[0].time_out,
+            timeIn: (dataJSON.time_in == undefined) ? new Date(0).toISOString() : dataJSON[0].time_in,
+            timeOut:(dataJSON.time_out == undefined) ? new Date(0).toISOString() : dataJSON[0].time_out,
             tagIssue: dataJSON.tag,
             tagReturned: dataJSON.tag_ret});
             let staffInline:StaffInlineProps = {staff};

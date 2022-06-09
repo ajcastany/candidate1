@@ -4,8 +4,8 @@ export class Staff {
         name:string = '';
         department:string ='';
         meetingRoom:string ='';
-        timeIn: Date = new Date();
-        timeOut: Date = new Date();
+        timeIn: string='';
+        timeOut: string='';
         tagIssue: string = '';
         tagReturned:boolean = false;
         get isNew(): boolean {

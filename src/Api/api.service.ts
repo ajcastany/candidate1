@@ -18,8 +18,8 @@ export interface IDailyFormNamDep {
         id: number, 
         name: number, 
         room: string,
-        time_in: Date,
-        time_out: Date,
+        time_in: string,
+        time_out: string,
         tag: string,
         tag_ret: boolean,
         name_dep: {staff_name: string, staff_dept: string}
@@ -31,8 +31,8 @@ export interface IDailyForm {
     id: number | undefined,
     name: number,
     room: string,
-    time_in: Date,
-    time_out: Date,
+    time_in: string,
+    time_out: string,
     tag: string,
     tag_ret: boolean
     
@@ -73,6 +73,7 @@ export const StaffApiService = {
     getDayById: (id: number | undefined) : Promise<IDailyFormNamDep> => DailyFormRequests.get(`/daily_form/row_id/${id}`),
     addRoom: (day_form:IDailyForm) : Promise<IDailyForm> => DailyFormRequests.post('/daily_form/room', day_form),
     addTimeInOut: (day_form:IDailyForm) : Promise<IDailyForm> => DailyFormRequests.post('/daily_form/time', day_form),
+    addTimeInOutJSON: (data:JSON): Promise<JSON> => tagRequest.post('/daily_form/time', data),
     addTag: (day_form:IDailyForm): Promise<IDailyForm> => DailyFormRequests.post('/daily_form/tag', day_form),
     addTagJSON: (data:JSON): Promise<JSON> => tagRequest.post('/daily_form/tag', data),
     addTagRet: (day_form:IDailyForm): Promise<IDailyForm> => DailyFormRequests.post('/daily_form/tag_ret', day_form)
