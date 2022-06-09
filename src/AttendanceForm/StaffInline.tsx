@@ -107,15 +107,15 @@ function StaffInline(props: StaffInlineProps) {
     }
 
     function TagReturnedEmpty(tagRet:boolean, tag:string) {
-        var tagString = tagRet.toString();
+        var tagString = staffState.staff.tagReturned.toString();
         if (tagString == 'false' && tag === '') {
-            return (<Button>Returned?</Button>)
+            return ('')
         }
-        if (tagString == 'false') {
-            return (<Button>Returned?</Button>)
+        if (tagString == 'false' && tag !== '' && staffState.staff.timeOut !='None') {
+            return ("No")
         }
         if (tagString === 'true') {
-            return tagRet
+            return ("Yes")
         }
     }
 
