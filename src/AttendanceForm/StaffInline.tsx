@@ -25,8 +25,8 @@ function StaffInline(props: StaffInlineProps) {
     function SubmitTimeInValue() {
         let time:string = new Date().toISOString();
         var timeStr = time.substring(11,16)
-        console.log(time);
-        console.log(timeStr);
+        console.log(staffState.staff.id);
+        
         let data:IDailyForm ={
             day: staffState.staff.day,
             id: staffState.staff.id,
@@ -77,8 +77,7 @@ function StaffInline(props: StaffInlineProps) {
             </Button>);
         }
         else {
-            console.log(props.staff);
-            let timeOutFormat = staffState.staff.timeIn.substring(0,5);
+            let timeOutFormat = staffState.staff.timeOut.substring(0,5);
             return timeOutFormat;
             //return new Date(date).toLocaleTimeString('en-GB', {hour: '2-digit', minute: '2-digit'});
         } 
@@ -131,8 +130,8 @@ function StaffInline(props: StaffInlineProps) {
             name: dataJSON.name_dep.staff_name,
             department: dataJSON.name_dep.staff_dept,
             meetingRoom: dataJSON.room,
-            timeIn: (dataJSON.time_in === 'None') ? new Date(0).toISOString() : dataJSON.time_in,
-            timeOut:(dataJSON.time_out === 'None') ? new Date(0).toISOString() : dataJSON.time_out,
+            timeIn: (dataJSON.time_in === 'None') ? "None" : dataJSON.time_in,
+            timeOut:(dataJSON.time_out === 'None') ? "None" : dataJSON.time_out,
             tagIssue: dataJSON.tag,
             tagReturned: dataJSON.tag_ret});
 
