@@ -5,14 +5,19 @@ import { StaffApiService, IDailyForm } from '../Api/api.service';
 
 interface TagReturnedProps {
     id: number | undefined,
+    tag: string,
     showModal: boolean,
-    NoTagReturned: () => boolean,
-    YesTagReturned: () => boolean
-
+    closeModal: () => boolean
 }
 
 function TagReturnedModal(props: TagReturnedProps) {
+    function YesTagReturned() {
 
+    }
+
+    function NoTagReturned() {
+
+    }
 
     return (
         <Modal
@@ -24,13 +29,13 @@ function TagReturnedModal(props: TagReturnedProps) {
                 <Modal.Title>Did you return your Tag?</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                Did you return your tag?
+                Did you return Tag {props.tag}?
             </Modal.Body>
             <ModalFooter>
-                <Button variant="Success" onClick={props.YesTagReturned}>
+                <Button variant="success" onClick={YesTagReturned}>
                     Yes
                 </Button>
-                <Button variant="Danger" onClick={props.NoTagReturned}>
+                <Button variant="danger" onClick={NoTagReturned}>
                     No
                 </Button>
             </ModalFooter>

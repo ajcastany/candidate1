@@ -3,6 +3,7 @@ import { Button } from "react-bootstrap";
 import {Staff} from '../Data/Staff';
 import TagModal from '../AttendanceForm/TagModal';
 import {StaffApiService, IDailyFormNamDep, IDailyForm} from "../Api/api.service"
+import TagReturnedModal from "./TagReturnedModal";
 
 
 interface StaffInlineProps {
@@ -170,6 +171,11 @@ function StaffInline(props: StaffInlineProps) {
             showModal={showTagModal} 
             closeModal={() => CloseModal()} 
             updateParent={UpdateComponent}
+            />
+            <TagReturnedModal id={staffState.staff.id}
+            showModal={true}
+            closeModal={() => false}
+            tag={staffState.staff.tagIssue}
             />
             <tr>
                 <th scope='row'>{staffState.staff.id}</th>
