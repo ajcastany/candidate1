@@ -1,5 +1,6 @@
 export class Staff {
         id: number | undefined;
+        day: Date = new Date(0);
         name:string = '';
         department:string ='';
         meetingRoom:string ='';
