@@ -24,8 +24,8 @@ function StaffInline(props: StaffInlineProps) {
 
     function SubmitTimeInValue() {
         let time:string = new Date().toISOString();
-        var timeStr = time.substring(11,16)
-        console.log(staffState.staff.id);
+        var timeStr = time.substring(11,19)
+        console.log(timeStr);
         
         let data:IDailyForm ={
             day: staffState.staff.day,
@@ -49,9 +49,29 @@ function StaffInline(props: StaffInlineProps) {
         }
         
     function SubmitTimeOutValue() {
-        var time = new Date();
-        console.log(time);
-            
+        let time:string = new Date().toISOString();
+        var timeStr = time.substring(11,19)
+        console.log(timeStr);
+        
+        let data:IDailyForm ={
+            day: staffState.staff.day,
+            id: staffState.staff.id,
+            name: 0,
+            room: '',
+            time_in: staffState.staff.timeIn,
+            time_out: timeStr,
+            tag: staffState.staff.tagIssue,
+            tag_ret: staffState.staff.tagReturned
+        }
+        var dataTXT = JSON.stringify(data);
+        var dataJSON = JSON.parse(dataTXT);
+        StaffApiService.addTimeInOutJSON(dataJSON).then (
+            res => {
+                console.log(res);
+                UpdateComponent(staffState.staff.id);
+            }
+        )
+        //console.log(time);   
         }
     function formatDateToTimeIN(date:string) {
         //console.log(new Date(date) == new Date(0));
@@ -78,6 +98,7 @@ function StaffInline(props: StaffInlineProps) {
         }
         else {
             let timeOutFormat = staffState.staff.timeOut.substring(0,5);
+            console.log(timeOutFormat);
             return timeOutFormat;
             //return new Date(date).toLocaleTimeString('en-GB', {hour: '2-digit', minute: '2-digit'});
         } 
