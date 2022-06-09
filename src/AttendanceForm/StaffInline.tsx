@@ -15,7 +15,7 @@ interface StaffInlineProps {
 function StaffInline(props: StaffInlineProps) {
     const [showTagModal, setTagModal] = useState(false);
     const [showTagReturnedModal, setTagReturnedModal] = useState(false);
-    const showTagReturnedModel = () => {
+    const showTagReturnedModel = async () => {
         setTagReturnedModal(true);
         console.log("show tag returned: true");
     }
@@ -74,9 +74,15 @@ function StaffInline(props: StaffInlineProps) {
         StaffApiService.addTimeInOutJSON(dataJSON).then (
             res => {
                 console.log(res);
-                UpdateComponent(staffState.staff.id);
+                if (staffState.staff.tagIssue !== '') {
+                    showTagReturnedModel()
+                } else {
+                    UpdateComponent(staffState.staff.id);
+                }
+                
             }
         )
+       
         //console.log(time);   
         }
     function formatDateToTimeIN(date:string) {
@@ -147,6 +153,7 @@ function StaffInline(props: StaffInlineProps) {
 
     function CloseTagReturnedModal() {
         setTagReturnedModal(false);
+        UpdateComponent(staffState.staff.id);
         return false;
     }
     
@@ -184,7 +191,7 @@ function StaffInline(props: StaffInlineProps) {
             />
             <TagReturnedModal id={staffState.staff.id}
             //Change this to hook showTagReturnedModal when done debuggin'
-            showModal={true}
+            showModal={showTagReturnedModal}
             closeModal={() => CloseTagReturnedModal()}
             tag={staffState.staff.tagIssue}
             />

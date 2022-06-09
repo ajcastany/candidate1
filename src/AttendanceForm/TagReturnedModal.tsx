@@ -16,7 +16,7 @@ function TagReturnedModal(props: TagReturnedProps) {
     }
 
     function NoTagReturned() {
-
+        props.closeModal();
     }
 
     return (
@@ -24,6 +24,8 @@ function TagReturnedModal(props: TagReturnedProps) {
         show={props.showModal}
         backdrop="static"
         keyboard={false}
+        onHide={() => props.closeModal()}
+        cancel={() => props.closeModal()}
         >
             <Modal.Header closeButton>
                 <Modal.Title>Did you return your Tag?</Modal.Title>
