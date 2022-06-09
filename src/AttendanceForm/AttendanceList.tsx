@@ -8,7 +8,7 @@ interface StaffListProps {
 
 function AttendanceList({staffs}: StaffListProps) {
         const items = staffs.map(staff => (
-        <React.Fragment>
+        <React.Fragment key={staff.id}>
                 <StaffInline staff={staff}></StaffInline>            
         </React.Fragment>
         ));
