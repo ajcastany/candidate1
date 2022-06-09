@@ -34,6 +34,14 @@ function StaffInline(props: StaffInlineProps) {
             tag: props.staff.tagIssue,
             tag_ret:props.staff.tagReturned
         }
+        var dataTXT = JSON.stringify(data);
+        var dataJSON = JSON.parse(dataTXT);
+        StaffApiService.addTimeInOut(dataJSON).then (
+            res => {
+                console.log(res);
+                UpdateComponent(props.staff.id);
+            }
+        )
         console.log(time);
         }
         
