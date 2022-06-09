@@ -23,13 +23,16 @@ function StaffInline(props: StaffInlineProps) {
         staffState: StaffInlineProps) => void ] = useState({staff});
 
     function SubmitTimeInValue() {
-        var time = new Date().toISOString();
+        let time:string = new Date().toISOString();
+        var timeStr = time.substring(11,16)
+        console.log(time);
+        console.log(timeStr);
         let data:IDailyForm ={
             day: props.staff.day,
             id: props.staff.id,
             name: 0,
             room: '',
-            time_in: time,
+            time_in: timeStr,
             time_out: props.staff.timeOut,
             tag: props.staff.tagIssue,
             tag_ret:props.staff.tagReturned
@@ -52,27 +55,31 @@ function StaffInline(props: StaffInlineProps) {
         }
     function formatDateToTimeIN(date:string) {
         //console.log(new Date(date) == new Date(0));
-        console.log(date);
-        if (date === new Date(0).toISOString()) {
+        //console.log(date);
+        if (date === 'None') {
             return (<Button onClick={SubmitTimeInValue}>
                 IN
             </Button>);
         }
         else {
-            return new Date(date).toLocaleTimeString('en-GB', {hour: '2-digit', minute: '2-digit'});
+            let timeINFormat = props.staff.timeIn.substring(0, 5);
+            return timeINFormat;
+            //return new Date(date).toLocaleTimeString('en-GB', {hour: '2-digit', minute: '2-digit'});
         } 
         
     }
     function formatDateToTimeOUT(date:string) {
         //console.log(date.toISOString() === new Date(0).toISOString());
         //console.log(new Date(date) == new Date(0));
-        if (date === new Date(0).toISOString()) {
+        if (date === 'None') {
             return (<Button onClick={SubmitTimeOutValue}>
                 OUT
             </Button>);
         }
         else {
-            return new Date(date).toLocaleTimeString('en-GB', {hour: '2-digit', minute: '2-digit'});
+            let timeOutFormat = props.staff.timeIn.substring(0,5);
+            return timeOutFormat;
+            //return new Date(date).toLocaleTimeString('en-GB', {hour: '2-digit', minute: '2-digit'});
         } 
 
         
@@ -117,17 +124,19 @@ function StaffInline(props: StaffInlineProps) {
             
             var dataTXT = JSON.stringify(data);
             var dataJSON = JSON.parse(dataTXT);
-            console.log(dataJSON.id);
+            console.log(dataJSON.time_in);
             var staff:Staff = new Staff({
             id: dataJSON.id,
             name: dataJSON.name_dep.staff_name,
             department: dataJSON.name_dep.staff_dept,
             meetingRoom: dataJSON.room,
-            timeIn: (dataJSON.time_in == undefined) ? new Date(0).toISOString() : dataJSON[0].time_in,
-            timeOut:(dataJSON.time_out == undefined) ? new Date(0).toISOString() : dataJSON[0].time_out,
+            timeIn: (dataJSON.time_in === 'None') ? new Date(0).toISOString() : dataJSON.time_in,
+            timeOut:(dataJSON.time_out === 'None') ? new Date(0).toISOString() : dataJSON.time_out,
             tagIssue: dataJSON.tag,
             tagReturned: dataJSON.tag_ret});
+
             let staffInline:StaffInlineProps = {staff};
+            console.log(staffInline.toString());
             setStaffForm(staffInline);
         }
         
