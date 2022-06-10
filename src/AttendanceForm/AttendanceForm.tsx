@@ -13,6 +13,7 @@ function BuildRowData(data:IDailyFormNamDep[]) {
     }
 
     function CheckDateNotNull(json:string) {
+        //DB date column is never null;
         if (json == undefined) {
             return new Date(0);
         } else {
