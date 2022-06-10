@@ -3,7 +3,7 @@ import { Button, Container, Form } from "react-bootstrap";
 import AdminPanelList from "./AdminPanelList";
 
 function AdminPanel() {
-    const [attendanceDay, setAttendanceDay] = useState(new Date().toISOString())
+    const [attendanceDay, setAttendanceDay] = useState(new Date().toISOString().substring(0,10))
     console.log("DATE: ", attendanceDay);
     return (
     <div>
@@ -14,10 +14,11 @@ function AdminPanel() {
             <Form.Group>
                 <Form.Label>Select Date</Form.Label>
                 <Form.Control type='date' 
+                placeholder="aaa"
                 name='attendance-day'
-                placeholder="aaaaa"
+                
                 value={attendanceDay}
-                onChange={(e) => setAttendanceDay(e.target.value)}/>
+                onChange={(e) => setAttendanceDay(e.target.value)} />
             </Form.Group>
             
 
