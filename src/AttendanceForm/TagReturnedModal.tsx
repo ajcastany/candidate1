@@ -48,7 +48,7 @@ function TagReturnedModal(props: TagReturnedProps) {
                 <Modal.Title>Did you return your Tag?</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                Did you return Tag {props.tag}?
+                Did you return Tag <strong>{props.tag}</strong>?
             </Modal.Body>
             <ModalFooter className='justify-content-between'>
                 <ButtonGroup >
