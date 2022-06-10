@@ -89,7 +89,7 @@ function StaffInline(props: StaffInlineProps) {
         //console.log(new Date(date) == new Date(0));
         //console.log(date);
         if (date === 'None') {
-            return (<Button onClick={SubmitTimeInValue}>
+            return (<Button variant='success'onClick={SubmitTimeInValue}>
                 IN
             </Button>);
         }
@@ -104,7 +104,7 @@ function StaffInline(props: StaffInlineProps) {
         //console.log(date.toISOString() === new Date(0).toISOString());
         //console.log(new Date(date) == new Date(0));
         if (date === 'None') {
-            return (<Button onClick={SubmitTimeOutValue}>
+            return (<Button variant='danger' onClick={SubmitTimeOutValue}>
                 OUT
             </Button>);
         }
