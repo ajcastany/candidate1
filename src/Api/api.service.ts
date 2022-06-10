@@ -76,7 +76,8 @@ export const StaffApiService = {
     addTimeInOutJSON: (data:JSON): Promise<JSON> => tagRequest.post('/daily_form/time', data),
     addTag: (day_form:IDailyForm): Promise<IDailyForm> => DailyFormRequests.post('/daily_form/tag', day_form),
     addTagJSON: (data:JSON): Promise<JSON> => tagRequest.post('/daily_form/tag', data),
-    addTagRet: (day_form:IDailyForm): Promise<IDailyForm> => DailyFormRequests.post('/daily_form/tag_ret', day_form)
+    addTagRet: (day_form:IDailyForm): Promise<IDailyForm> => DailyFormRequests.post('/daily_form/tag_ret', day_form),
+    addTagRetJSON: (data:JSON): Promise<JSON> => tagRequest.post('/daily_form/tag_ret', data),
 
 };
 
