@@ -9,13 +9,16 @@ function AdminPanel() {
     console.log("DATE: ", attendanceDay);
     const [daily_forms, setDailyForms]:[IDailyFormNamDep[], (
         daily_forms: IDailyFormNamDep[]) => void] = useState<IDailyFormNamDep[]>([]);
-    useEffect( () => {
+        useEffect( () => {
         StaffApiService.getDay(attendanceDay).then( (data) => setDailyForms(data))
         }, []);
-    console.log(daily_forms)
-    function GetDayRows() {
 
+    const [showAddNewRowModal, setShowAddNewRowModal] = useState(false);
+    const showAddNewRowModel = async () => {
+        setShowAddNewRowModal(true);
     }
+    
+    console.log(daily_forms)
 
     function BuildRowData(data:IDailyFormNamDep[]) {
         var staff_list: Staff[] = [];
