@@ -3,6 +3,8 @@ import { Button, Container, Form } from "react-bootstrap";
 import { IDailyFormNamDep, StaffApiService } from "../Api/api.service";
 import AdminPanelList from "./AdminPanelList";
 import { Staff } from "../Data/Staff";
+import TagModal from "../AttendanceForm/TagModal";
+import AddNewRowModal from "./AddNewRowModal";
 
 function AdminPanel() {
     const [attendanceDay, setAttendanceDay]= useState(new Date().toISOString().substring(0,10))
@@ -46,14 +48,18 @@ function AdminPanel() {
         return staff_list;
     }
 
-    function AddNewRow() {
-
+    function CloseAddNewModal() {
+        setShowAddNewRowModal(false);
+        return false;
     }
 
     let rowsData:Staff[] = BuildRowData(daily_forms)
 
     return (
     <div>
+        <AddNewRowModal
+            showModal={showAddNewRowModal}
+            closeModal={() => CloseAddNewModal()} />
         <div className="orange-strip">
             <h2 className="display-4 text-center"><strong>Admin Panel</strong></h2>
         </div>
@@ -89,7 +95,7 @@ function AdminPanel() {
             </table>
         </div>
         <Container>
-            <Button onClick={AddNewRow}>Add new Entry</Button>
+            <Button onClick={showAddNewRowModel}>Add new Entry</Button>
         </Container>    
     </div>
  
