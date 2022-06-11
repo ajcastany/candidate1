@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Container, Form } from "react-bootstrap";
-import { IDailyFormNamDep } from "../Api/api.service";
+import { IDailyFormNamDep, StaffApiService } from "../Api/api.service";
 import AdminPanelList from "./AdminPanelList";
 import { Staff } from "../Data/Staff";
 
@@ -9,9 +9,14 @@ function AdminPanel() {
     console.log("DATE: ", attendanceDay);
     const [daily_forms, setDailyForms]:[IDailyFormNamDep[], (
         daily_forms: IDailyFormNamDep[]) => void] = useState<IDailyFormNamDep[]>([]);
+    useEffect( () => {
+        StaffApiService.getDay(attendanceDay).then( (data) => {
+            setDailyForms(data)
+        });
+    });
 
     function GetDayRows() {
-        
+
     }
 
     function BuildRowData(data:IDailyFormNamDep[]) {

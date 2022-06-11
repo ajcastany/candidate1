@@ -179,7 +179,7 @@ function StaffInline(props: StaffInlineProps) {
             setStaffForm(staffInline);
         }
         
-        StaffApiService.getDayById(id).then((data) => ParseJSON(data));
+        StaffApiService.getRowByID(id).then((data) => ParseJSON(data));
     }
 
     return (
