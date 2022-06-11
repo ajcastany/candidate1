@@ -56,7 +56,7 @@ const DailyFormRequests = {
     post: (url:string, body:IDailyForm) => http.post(url, body).then(responseBody)
 }
 
-const tagRequest  = {
+const JsonRequest  = {
     get: (url:string) => http.get(url).then(responseBody),
     post: (url:string, body:JSON) => http.post(url, body).then(responseBody)
 }
@@ -66,18 +66,18 @@ export const StaffApiService = {
         console.log('res');
         return StaffRequests.get('/staff/all')},
     getStaffByID : (id:number | undefined) : Promise<IStaff> => StaffRequests.get(`/staff/${id}`),
-    getDay: (day:string) : Promise<IDailyFormNamDep> => DailyFormRequests.get(`/daily_form/${day}`),
+    getDay: (day:string) : Promise<IDailyFormNamDep[]> => DailyFormRequests.get(`/daily_form/day/${day}`),
     getAllDays: () : Promise<IDailyFormNamDep[]> => {
         console.log('res');
         return DailyFormRequests.get('/daily_form/all_days')},
-    getDayById: (id: number | undefined) : Promise<IDailyFormNamDep> => DailyFormRequests.get(`/daily_form/row_id/${id}`),
+    getRowByID: (id: number | undefined) : Promise<IDailyFormNamDep> => DailyFormRequests.get(`/daily_form/row_id/${id}`),
     addRoom: (day_form:IDailyForm) : Promise<IDailyForm> => DailyFormRequests.post('/daily_form/room', day_form),
     addTimeInOut: (day_form:IDailyForm) : Promise<IDailyForm> => DailyFormRequests.post('/daily_form/time', day_form),
-    addTimeInOutJSON: (data:JSON): Promise<JSON> => tagRequest.post('/daily_form/time', data),
+    addTimeInOutJSON: (data:JSON): Promise<JSON> => JsonRequest.post('/daily_form/time', data),
     addTag: (day_form:IDailyForm): Promise<IDailyForm> => DailyFormRequests.post('/daily_form/tag', day_form),
-    addTagJSON: (data:JSON): Promise<JSON> => tagRequest.post('/daily_form/tag', data),
+    addTagJSON: (data:JSON): Promise<JSON> => JsonRequest.post('/daily_form/tag', data),
     addTagRet: (day_form:IDailyForm): Promise<IDailyForm> => DailyFormRequests.post('/daily_form/tag_ret', day_form),
-    addTagRetJSON: (data:JSON): Promise<JSON> => tagRequest.post('/daily_form/tag_ret', data),
+    addTagRetJSON: (data:JSON): Promise<JSON> => JsonRequest.post('/daily_form/tag_ret', data),
 
 };
 
