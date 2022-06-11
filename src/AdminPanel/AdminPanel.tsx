@@ -5,24 +5,23 @@ import AdminPanelList from "./AdminPanelList";
 import { Staff } from "../Data/Staff";
 
 function AdminPanel() {
-    const [attendanceDay, setAttendanceDay] = useState(new Date().toISOString().substring(0,10))
+    const [attendanceDay, setAttendanceDay]= useState(new Date().toISOString().substring(0,10))
     console.log("DATE: ", attendanceDay);
     const [daily_forms, setDailyForms]:[IDailyFormNamDep[], (
         daily_forms: IDailyFormNamDep[]) => void] = useState<IDailyFormNamDep[]>([]);
     useEffect( () => {
-        StaffApiService.getDay(attendanceDay).then( (data) => {
-            setDailyForms(data)
-        });
-    });
-
+        StaffApiService.getDay(attendanceDay).then( (data) => setDailyForms(data))
+        }, []);
+    console.log(daily_forms)
     function GetDayRows() {
 
     }
 
     function BuildRowData(data:IDailyFormNamDep[]) {
         var staff_list: Staff[] = [];
+    
         if (data.length == 0) {
-            console.log("No dat");
+            console.log("No data");
             return staff_list;
         }
         data.forEach(element => {
@@ -48,6 +47,7 @@ function AdminPanel() {
 
     }
 
+    let rowsData:Staff[] = BuildRowData(daily_forms)
 
     return (
     <div>
@@ -81,7 +81,7 @@ function AdminPanel() {
                     </tr>
                 </thead>
                 <tbody>
-                    <AdminPanelList />
+                    <AdminPanelList staffs={rowsData} />
                 </tbody>
             </table>
         </div>
