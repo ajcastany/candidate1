@@ -10,7 +10,7 @@ function AdminPanelInline() {
                 <td>timeIn</td>
                 <td>timeOut</td>
                 <td>tag</td>
-                <td>tagRet</td>
+                <td>tagRet</td> 
             </tr>
         </React.Fragment>
     );

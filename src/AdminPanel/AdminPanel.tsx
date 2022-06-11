@@ -10,6 +10,10 @@ function AdminPanel() {
     const [daily_forms, setDailyForms]:[IDailyFormNamDep[], (
         daily_forms: IDailyFormNamDep[]) => void] = useState<IDailyFormNamDep[]>([]);
 
+    function GetDayRows() {
+        
+    }
+
     function BuildRowData(data:IDailyFormNamDep[]) {
         var staff_list: Staff[] = [];
         if (data.length == 0) {
@@ -33,6 +37,10 @@ function AdminPanel() {
         });
         console.log("admin_panel", staff_list);
         return staff_list;
+    }
+
+    function AddNewRow() {
+
     }
 
 
@@ -73,7 +81,7 @@ function AdminPanel() {
             </table>
         </div>
         <Container>
-            <Button>Add new Entry</Button>
+            <Button onClick={AddNewRow}>Add new Entry</Button>
         </Container>    
     </div>
  
