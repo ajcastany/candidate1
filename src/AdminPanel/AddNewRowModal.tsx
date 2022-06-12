@@ -1,5 +1,6 @@
 import React from "react";
 import { Form, Modal, ModalFooter, Button } from "react-bootstrap";
+import { MOCK_DATA } from "../Data/TEST/MockStaff";
 
 interface AddNewRowProps{
     showModal: boolean,
@@ -8,19 +9,22 @@ interface AddNewRowProps{
 
 const MOCK_STAFF = [{
     id: 1,
-    name: "jhon stephen",
+    name: "Jhon Doe",
     department: "HR"
 }, {
     id: 2,
-    name: "Jane rogers",
+    name: "Jane Doe",
     department: "Research"
 }, {
     id: 3,
     name: "Elizabeth meyer",
-    department: "Facilities"
-}
+    department: "Operations"
+}]
 
-]
+function onChangeHandler(e:React.SyntheticEvent) {
+    
+    console.log(e.target);
+}
 
 function AddNewRowModal(props:AddNewRowProps) {
 
@@ -37,17 +41,20 @@ function AddNewRowModal(props:AddNewRowProps) {
                 <Modal.Body>
                     <Form.Group className="mb-3">
                         <Form.Label>Name</Form.Label>    
-                            <Form.Control 
-                            list="namesList"/>
+                            <Form.Control
+                            name="staffName"
+                            data-value={0}
+                            list="namesList"
+                            onChange={(e) => onChangeHandler(e)}/>
                         <Form.Label>Department</Form.Label>
-                            <Form.Control />
+                            <Form.Control 
+                            name="staffDept"/>
                         <Form.Label>Meeting Room</Form.Label>
                             <Form.Control />
                         <datalist id="namesList">
-                            <option data-value="1">one</option>
-                            <option data-value='2'>two</option>
-                            <option>three</option>
-                            <option>four</option>
+                           {MOCK_DATA.map( (data) => (
+                            <option key={data.id} value={data.name} data-value={data.department}></option>
+                           ))}
                         </datalist>
                     </Form.Group>
                 </Modal.Body>
