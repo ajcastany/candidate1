@@ -43,8 +43,12 @@ function AddNewRowModal(props:AddNewRowProps) {
             setSelectedStaffID(value.value!);
             setSelectedDept(value.department);
         }
-        
-        
+    }
+
+    function SubmitNewRow() {
+        console.log("submit");
+        //Add api request.
+        props.closeModal();
     }
 
     function BuildOptions (data:any[]) {
@@ -59,6 +63,7 @@ function AddNewRowModal(props:AddNewRowProps) {
     }
     var nameOptions = BuildOptions(MOCK_DATA);
 
+    //Unused...
     const formatOption = (option:StaffOption, 
         formatOptionLabelMeta:FormatOptionLabelMeta<StaffOption>) => {
         //return ( context === 'menu' ? option.label : option.label);
@@ -98,7 +103,7 @@ function AddNewRowModal(props:AddNewRowProps) {
                 </Modal.Body>
                 
                 <ModalFooter>
-                    <Button variant='primary'>Create Entry</Button>
+                    <Button variant='primary' onClick={SubmitNewRow}>Create Entry</Button>
                     <Button variant='danger' onClick={() => props.closeModal()}>Cancel</Button>
                 </ModalFooter>
             </Modal>
