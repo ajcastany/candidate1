@@ -1,13 +1,14 @@
-import React from "react";
+import React, {useState} from "react";
 import { Form, Modal, ModalFooter, Button } from "react-bootstrap";
-import { MOCK_DATA } from "../Data/TEST/MockStaff";
+
 
 interface AddNewRowProps{
     showModal: boolean,
     closeModal: () => boolean,
 }
 
-const MOCK_STAFF = [{
+
+const MOCK_DATA = [{
     id: 1,
     name: "Jhon Doe",
     department: "HR"
@@ -21,14 +22,22 @@ const MOCK_STAFF = [{
     department: "Operations"
 }]
 
-function onChangeHandler(e:React.SyntheticEvent) {
-    
-    console.log(e.target);
-}
+
 
 function AddNewRowModal(props:AddNewRowProps) {
+    const [selectedStaff, setSelectedStaff] = useState("");
+    const [selectedStaffID, setSelectedStaffID] = useState("");
 
-
+    function onChangeHandler(e:React.SyntheticEvent) {
+        const target = e.target as HTMLInputElement;
+        const htmlTarget = e.target as HTMLElement
+        console.log(target.getAttribute('id-value'));
+        setSelectedStaff(target.value);
+        let idValue:string = target.getAttribute('id-value')?.toString() || "";
+        setSelectedStaffID(idValue);
+        console.log(idValue);
+        
+    }
     return (
         <Modal
             show={props.showModal}
@@ -43,7 +52,8 @@ function AddNewRowModal(props:AddNewRowProps) {
                         <Form.Label>Name</Form.Label>    
                             <Form.Control
                             name="staffName"
-                            data-value={0}
+                            value={selectedStaff}
+                            id-value={selectedStaffID}
                             list="namesList"
                             onChange={(e) => onChangeHandler(e)}/>
                         <Form.Label>Department</Form.Label>
@@ -53,7 +63,7 @@ function AddNewRowModal(props:AddNewRowProps) {
                             <Form.Control />
                         <datalist id="namesList">
                            {MOCK_DATA.map( (data) => (
-                            <option key={data.id} value={data.name} data-value={data.department}></option>
+                            <option id={data.id.toString()} key={data.id} value={data.name} label={data.department} id-value={data.id}>{data.name}</option>
                            ))}
                         </datalist>
                     </Form.Group>
