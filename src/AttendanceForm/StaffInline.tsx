@@ -30,16 +30,14 @@ function StaffInline(props: StaffInlineProps) {
 
     function SubmitTimeInValue() {
         let time:string = new Date().toLocaleTimeString('en-GB');
-        console.log(time);
-        var timeStr = time;
-        console.log(timeStr);
+        //console.log(time);
         
         let data:IDailyForm ={
             day: staffState.staff.day,
             id: staffState.staff.id,
             name: 0,
             room: '',
-            time_in: timeStr,
+            time_in: time,
             time_out: staffState.staff.timeOut,
             tag: staffState.staff.tagIssue,
             tag_ret: staffState.staff.tagReturned
@@ -57,8 +55,7 @@ function StaffInline(props: StaffInlineProps) {
         
     function SubmitTimeOutValue() {
         let time:string = new Date().toLocaleTimeString('en-GB');
-        var timeStr = time;
-        console.log(timeStr);
+        //console.log(time);
         
         let data:IDailyForm ={
             day: staffState.staff.day,
@@ -66,7 +63,7 @@ function StaffInline(props: StaffInlineProps) {
             name: 0,
             room: '',
             time_in: staffState.staff.timeIn,
-            time_out: timeStr,
+            time_out: time,
             tag: staffState.staff.tagIssue,
             tag_ret: staffState.staff.tagReturned
         }
