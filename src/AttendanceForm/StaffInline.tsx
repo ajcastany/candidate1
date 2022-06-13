@@ -29,8 +29,9 @@ function StaffInline(props: StaffInlineProps) {
         staffState: StaffInlineProps) => void ] = useState({staff});
 
     function SubmitTimeInValue() {
-        let time:string = new Date().toISOString();
-        var timeStr = time.substring(11,19)
+        let time:string = new Date().toLocaleTimeString('en-GB');
+        console.log(time);
+        var timeStr = time;
         console.log(timeStr);
         
         let data:IDailyForm ={
@@ -55,8 +56,8 @@ function StaffInline(props: StaffInlineProps) {
         }
         
     function SubmitTimeOutValue() {
-        let time:string = new Date().toISOString();
-        var timeStr = time.substring(11,19)
+        let time:string = new Date().toLocaleTimeString('en-GB');
+        var timeStr = time;
         console.log(timeStr);
         
         let data:IDailyForm ={
@@ -110,7 +111,7 @@ function StaffInline(props: StaffInlineProps) {
         }
         else {
             let timeOutFormat = staffState.staff.timeOut.substring(0,5);
-            console.log(timeOutFormat);
+            //console.log(timeOutFormat);
             return timeOutFormat;
             //return new Date(date).toLocaleTimeString('en-GB', {hour: '2-digit', minute: '2-digit'});
         } 
