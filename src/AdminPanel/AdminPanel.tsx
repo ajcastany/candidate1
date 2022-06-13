@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Button, Container, Form } from "react-bootstrap";
+import { Button, Container, Form, Row, Col } from "react-bootstrap";
 import { IDailyFormNamDep, StaffApiService } from "../Api/api.service";
 import AdminPanelList from "./AdminPanelList";
 import { Staff } from "../Data/Staff";
@@ -7,12 +7,17 @@ import TagModal from "../AttendanceForm/TagModal";
 import AddNewRowModal from "./AddNewRowModal";
 
 function AdminPanel() {
-    const [attendanceDay, setAttendanceDay]= useState(new Date().toISOString().substring(0,10))
+    //const [attendanceDay, setAttendanceDay]= useState(new Date().toISOString().substring(0,10))
+    //debug:
+    const [attendanceDay, setAttendanceDay]= useState('2000-01-01')
     console.log("DATE: ", attendanceDay);
     const [daily_forms, setDailyForms]:[IDailyFormNamDep[], (
         daily_forms: IDailyFormNamDep[]) => void] = useState<IDailyFormNamDep[]>([]);
-        useEffect( () => {
-        StaffApiService.getDay(attendanceDay).then( (data) => setDailyForms(data))
+    useEffect( () => {
+        StaffApiService.getDay(attendanceDay).then( (data) => {
+            console.log("data:" + (data.toString()));
+            setDailyForms(data)
+            })
         }, []);
 
     const [showAddNewRowModal, setShowAddNewRowModal] = useState(false);
@@ -29,13 +34,14 @@ function AdminPanel() {
             console.log("No data");
             return staff_list;
         }
+        console.log("length: " + data.toString());
         data.forEach(element => {
             var elementTXT = JSON.stringify(element);
             var elementJSON = JSON.parse(elementTXT);
             let staff:Staff = new Staff({
                 id: elementJSON.id,
                 name: elementJSON.name_dep.staff_name,
-                department: elementJSON.name_dep.staff_department,
+                department: elementJSON.name_dep.staff_dept,
                 meetingRoom: elementJSON.room,
                 timeIn: elementJSON.time_in,
                 timeOut: elementJSON.time_out,
@@ -53,6 +59,14 @@ function AdminPanel() {
         return false;
     }
 
+    function OpenDay() {
+        console.log("open day: " + attendanceDay.toString());
+        StaffApiService.getDay(attendanceDay).then( (data) => {
+                console.log("data:" + (data.toString()));
+                setDailyForms(data)
+                })
+    }
+
     let rowsData:Staff[] = BuildRowData(daily_forms)
 
     return (
@@ -63,7 +77,9 @@ function AdminPanel() {
         <div className="orange-strip">
             <h2 className="display-4 text-center"><strong>Admin Panel</strong></h2>
         </div>
-        <Container className="my-auto date-container">
+        <Container className="my-auto date-container" style={{display:'flex'}}>
+            <Row>
+                <Col>
             <Form.Group>
                 <Form.Label>Select Date</Form.Label>
                 <Form.Control type='date' 
@@ -72,10 +88,15 @@ function AdminPanel() {
                 
                 value={attendanceDay}
                 onChange={(e) => setAttendanceDay(e.target.value)} />
+                
             </Form.Group>
-            
-
+            </Col>
+            <Col className='open-button py-auto' style={{display:'flex'}} >
+            <Button className="open-button" onClick={OpenDay}>Open Day</Button> 
+            </Col>
+            </Row>
         </Container>
+        
         <div className="container">
             <table className="table table-striped table-hover table-responsive">
                 <thead className="table">
