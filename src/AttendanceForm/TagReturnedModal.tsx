@@ -3,14 +3,14 @@ import {useState} from 'react';
 import {Button, Modal, ModalFooter, Form, ButtonGroup} from 'react-bootstrap';
 import { StaffApiService, IDailyForm } from '../Api/api.service';
 
-interface TagReturnedProps {
+interface ITagReturnedProps {
     id: number | undefined,
     tag: string,
     showModal: boolean,
     closeModal: () => boolean
 }
 
-function TagReturnedModal(props: TagReturnedProps) {
+function TagReturnedModal(props: ITagReturnedProps) {
     function YesTagReturned() {
         const data:IDailyForm = {
             day: new Date(0),
@@ -42,7 +42,6 @@ function TagReturnedModal(props: TagReturnedProps) {
         backdrop="static"
         keyboard={false}
         onHide={() => props.closeModal()}
-        cancel={() => props.closeModal()}
         >
             <Modal.Header closeButton>
                 <Modal.Title>Did you return your Tag?</Modal.Title>
