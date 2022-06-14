@@ -12,11 +12,11 @@ function AdminPanelInline(props: StaffInlineProps) {
 
     function formatDateToTimeIN(time:string) {
         if (time ==='None') {
-            return (<Button variant='success'>Edit</Button>)
+            return (<Button variant='success'>Time In</Button>)
         }
         else {
             let timeInFormat = staffState.staff.timeIn.substring(0,5);
-            return (<>{timeInFormat} <Button variant='secondary'>
+            return (<>{timeInFormat} <Button variant='secondary' size='sm'>
                 Edit</Button></>)
         }
     }
@@ -25,18 +25,18 @@ function AdminPanelInline(props: StaffInlineProps) {
             return(<Button>Add Room</Button>)
         }
         if (staffState.staff.meetingRoom !== '') {
-            return(<>{staffState.staff.meetingRoom}<Button
-            variant='secondary'>Edit</Button></>)
+            return(<>{staffState.staff.meetingRoom} <Button
+            variant='secondary' size='sm'>Edit</Button></>)
         }
     }
 
     function formatDateToTimeOut(time:string) {
         if (time === 'None') {
-            return (<Button variant='danger'>Edit</Button>)
+            return (<Button variant='danger'>Time Out</Button>)
         }
         else {
             let timeOutFormat = staffState.staff.timeOut.substring(0,5);
-            return(<>{timeOutFormat}<Button variant='secondary'>
+            return(<>{timeOutFormat} <Button variant='secondary' size='sm'>
                 Edit
             </Button></>)
         }
@@ -49,7 +49,7 @@ function AdminPanelInline(props: StaffInlineProps) {
         }
         else {
             return (
-                <>{staffState.staff.tagIssue} <Button variant='secondary'>
+                <>{staffState.staff.tagIssue} <Button variant='secondary' size='sm'>
                     Edit
                     </Button></>
             );
@@ -62,13 +62,13 @@ function AdminPanelInline(props: StaffInlineProps) {
             return (<Button variant='primary'>Edit</Button>)
         }
         if (tagRetStr === 'false' && tag!=='' && staffState.staff.timeOut !== 'None') {
-            return (<>No<Button variant='secondary'>Edit</Button></>)
+            return (<>No <Button variant='secondary' size='sm'>Edit</Button></>)
         }
         if (tagRetStr === 'false' && tag!=='' && staffState.staff.timeOut === 'None') {
             return (<Button variant='secondary'>Edit</Button>)
         }
         if (tagRetStr === 'true') {
-            return (<>Yes<Button variant='secondary'>Edit</Button></>);
+            return (<>Yes <Button variant='secondary' size='sm'>Edit</Button></>);
         }
     }
 
