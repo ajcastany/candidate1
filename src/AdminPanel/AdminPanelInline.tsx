@@ -3,6 +3,7 @@ import { Button } from 'react-bootstrap';
 import { IDailyFormNamDep, StaffApiService } from '../Api/api.service';
 import {Staff} from '../Data/Staff';
 import AddRoomModal from './Modals/AddRoomModal';
+import EditTagIssueModal from './Modals/EditTagIssueModal';
 
 interface StaffInlineProps {
     staff: Staff
@@ -18,6 +19,10 @@ function AdminPanelInline(props: StaffInlineProps) {
     }
     const showEditRoomModel = async () => {
         setShowAddRoomModal(true);
+    }
+    const [showIssueTagModal, setShowIssueTagModal] = useState(false);
+    const showIssueTagModel = async () => {
+        setShowIssueTagModal(true);
     }
     // Modal Functions
 
@@ -46,11 +51,16 @@ function AdminPanelInline(props: StaffInlineProps) {
     }
 
     function CloseAddRoomModal() {
-        console.log("here");
         setShowAddRoomModal(false);
         return false;
 
     }
+
+    function CloseIssueTagModal() {
+        setShowIssueTagModal(false);
+        return false;
+    }
+
     //Inline Renders
     function formatDateToTimeIN(time:string) {
         if (time ==='None') {
@@ -88,13 +98,13 @@ function AdminPanelInline(props: StaffInlineProps) {
     function formatTagRender(tag:string) {
         console.log("the tag is: "+ tag);
         if (tag === '') {
-            return(<Button variant='primary'>
+            return(<Button variant='primary' onClick={showIssueTagModel}>
                 Issue
             </Button>);
         }
         else {
             return (
-                <>{staffState.staff.tagIssue} <Button variant='secondary' size='sm'>
+                <>{staffState.staff.tagIssue} <Button variant='secondary' onClick={showIssueTagModel} size='sm'>
                     Edit
                     </Button></>
             );
@@ -125,6 +135,12 @@ function AdminPanelInline(props: StaffInlineProps) {
                 showModal={showAddRoomModal}
                 closeModal={() => CloseAddRoomModal()}
                 updateParent={UpdateComponent}
+            />
+            <EditTagIssueModal 
+            id={staffState.staff.id}
+            showModal={showIssueTagModal}
+            closeModal={() => CloseIssueTagModal()}
+            updateParent={UpdateComponent}
             />
             <tr>
                 <td>{staffState.staff.name}</td>
