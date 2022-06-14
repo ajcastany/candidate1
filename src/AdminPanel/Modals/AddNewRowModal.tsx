@@ -5,7 +5,7 @@ import context from "react-bootstrap/esm/AccordionContext";
 import Select, { ActionMeta, OnChangeValue, OptionContext } from 'react-select';
 import { FormatOptionLabelMeta } from "react-select/dist/declarations/src/Select";
 //import ValueType from 'react-select';
-import {Staff} from '../Data/Staff';
+import {Staff} from '../../Data/Staff';
 
 
 interface AddNewRowProps{

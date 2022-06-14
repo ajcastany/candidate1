@@ -4,7 +4,7 @@ import { IDailyFormNamDep, StaffApiService } from "../Api/api.service";
 import AdminPanelList from "./AdminPanelList";
 import { Staff } from "../Data/Staff";
 import TagModal from "../AttendanceForm/TagModal";
-import AddNewRowModal from "./AddNewRowModal";
+import AddNewRowModal from "./Modals/AddNewRowModal";
 
 function AdminPanel() {
     //const [attendanceDay, setAttendanceDay]= useState(new Date().toISOString().substring(0,10))
