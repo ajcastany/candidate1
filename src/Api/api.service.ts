@@ -72,6 +72,7 @@ export const StaffApiService = {
         return DailyFormRequests.get('/daily_form/all_days')},
     getRowByID: (id: number | undefined) : Promise<IDailyFormNamDep> => DailyFormRequests.get(`/daily_form/row_id/${id}`),
     addRoom: (day_form:IDailyForm) : Promise<IDailyForm> => DailyFormRequests.post('/daily_form/room', day_form),
+    addRoomJSON: (day_form:JSON) : Promise<JSON> => JsonRequest.post('/daily_form/room', day_form),
     addTimeInOut: (day_form:IDailyForm) : Promise<IDailyForm> => DailyFormRequests.post('/daily_form/time', day_form),
     addTimeInOutJSON: (data:JSON): Promise<JSON> => JsonRequest.post('/daily_form/time', data),
     addTag: (day_form:IDailyForm): Promise<IDailyForm> => DailyFormRequests.post('/daily_form/tag', day_form),

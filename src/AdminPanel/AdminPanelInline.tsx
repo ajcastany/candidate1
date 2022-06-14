@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Button } from 'react-bootstrap';
+import { IDailyFormNamDep, StaffApiService } from '../Api/api.service';
 import {Staff} from '../Data/Staff';
+import AddRoomModal from './Modals/AddRoomModal';
 
 interface StaffInlineProps {
     staff: Staff
@@ -10,6 +12,52 @@ function AdminPanelInline(props: StaffInlineProps) {
     const [staffState, setStaffForm]:[StaffInlineProps, (
         staffState: StaffInlineProps) => void ] = useState({staff});
 
+    const [showAddRoomModal, setShowAddRoomModal] = useState(false);
+    const showAddRoomModel = async () => {
+        setShowAddRoomModal(true);
+    }
+    const showEditRoomModel = async () => {
+        setShowAddRoomModal(true);
+    }
+    // Modal Functions
+
+    function UpdateComponent(id: number | undefined) {
+        function ParseJSON(data:IDailyFormNamDep) {
+            var dataTXT = JSON.stringify(data);
+            var dataJSON = JSON.parse(dataTXT);
+            console.log("dataJson: " + dataJSON.room);
+            var staff:Staff = new Staff( {
+                id: dataJSON.id,
+                day: dataJSON.day,
+                name: dataJSON.name_dep.staff_name,
+                department: dataJSON.name_dep.staff_dept,
+                meetingRoom: dataJSON.room,
+                timeIn: (dataJSON.time_in === 'None') ? "None" : dataJSON.time_in,
+                timeOut: (dataJSON.time_out === 'None') ? "None" : dataJSON.time_out,
+                tagIssue: dataJSON.tag,
+                tagReturned: dataJSON.tag_ret
+            });
+            console.log("staffName: " + staff.meetingRoom);
+            let staffInline:StaffInlineProps = {staff};
+
+            setStaffForm(staffInline);
+            console.log("meetingRoom" + staffInline.staff.meetingRoom.toString());
+
+        }
+        console.log("Updating componenet");
+        StaffApiService.getRowByID(id).then((data) => {
+            ParseJSON(data);
+
+        });
+    }
+
+    function CloseAddRoomModal() {
+        console.log("here");
+        setShowAddRoomModal(false);
+        return false;
+
+    }
+    //Inline Renders
     function formatDateToTimeIN(time:string) {
         if (time ==='None') {
             return (<Button variant='success'>Time In</Button>)
@@ -22,11 +70,13 @@ function AdminPanelInline(props: StaffInlineProps) {
     }
     function renderMeetingRoom() {
         if (staffState.staff.meetingRoom === '') {
-            return(<Button>Add Room</Button>)
+            return(<Button onClick={showAddRoomModel}>Add Room</Button>)
         }
         if (staffState.staff.meetingRoom !== '') {
             return(<>{staffState.staff.meetingRoom} <Button
-            variant='secondary' size='sm'>Edit</Button></>)
+            variant='secondary' size='sm' onClick={showEditRoomModel}>
+                Edit
+                </Button></>)
         }
     }
 
@@ -42,6 +92,7 @@ function AdminPanelInline(props: StaffInlineProps) {
         }
     }
     function formatTagRender(tag:string) {
+        console.log("the tag is: "+ tag);
         if (tag === '') {
             return(<Button variant='primary'>
                 Issue
@@ -74,6 +125,13 @@ function AdminPanelInline(props: StaffInlineProps) {
 
     return (
         <React.Fragment>
+            <AddRoomModal
+                id={staffState.staff.id}
+                name={staffState.staff.name}
+                showModal={showAddRoomModal}
+                closeModal={() => CloseAddRoomModal()}
+                updateParent={UpdateComponent}
+            />
             <tr>
                 <td>{staffState.staff.name}</td>
                 <td>{staffState.staff.department}</td>
