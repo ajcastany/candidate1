@@ -4,6 +4,7 @@ import { IDailyFormNamDep, StaffApiService } from '../Api/api.service';
 import {Staff} from '../Data/Staff';
 import AddRoomModal from './Modals/AddRoomModal';
 import EditTagIssueModal from './Modals/EditTagIssueModal';
+import EditTagReturnedModal from './Modals/EditTagReturnedModal';
 
 interface StaffInlineProps {
     staff: Staff
@@ -23,6 +24,11 @@ function AdminPanelInline(props: StaffInlineProps) {
     const [showIssueTagModal, setShowIssueTagModal] = useState(false);
     const showIssueTagModel = async () => {
         setShowIssueTagModal(true);
+    }
+
+    const [showTagReturnedModal, setShowTagRetunedModal] = useState(false);
+    const showTagReturnedModel = async () => {
+        setShowTagRetunedModal(true);
     }
     // Modal Functions
 
@@ -61,6 +67,10 @@ function AdminPanelInline(props: StaffInlineProps) {
         return false;
     }
 
+    function CloseTagReturnedModal() {
+        setShowTagRetunedModal(false);
+        return false;
+    }
     //Inline Renders
     function formatDateToTimeIN(time:string) {
         if (time ==='None') {
@@ -114,16 +124,16 @@ function AdminPanelInline(props: StaffInlineProps) {
         var tagRetStr = staffState.staff.tagReturned.toString();
         var tag = staffState.staff.tagIssue;
         if (tagRetStr ==='false' && tag === '') {
-            return (<Button variant='primary'>Edit</Button>)
+            return ('')
         }
         if (tagRetStr === 'false' && tag!=='' && staffState.staff.timeOut !== 'None') {
-            return (<>No <Button variant='secondary' size='sm'>Edit</Button></>)
+            return (<>No <Button variant='danger' size='sm' onClick={showTagReturnedModel}>Edit</Button></>)
         }
         if (tagRetStr === 'false' && tag!=='' && staffState.staff.timeOut === 'None') {
-            return (<Button variant='secondary'>Edit</Button>)
+            return (<Button variant='primary' onClick={showTagReturnedModel}>Edit</Button>)
         }
         if (tagRetStr === 'true') {
-            return (<>Yes <Button variant='secondary' size='sm'>Edit</Button></>);
+            return (<>Yes <Button variant='success' size='sm' onClick={showTagReturnedModel}>Edit</Button></>);
         }
     }
 
@@ -140,6 +150,13 @@ function AdminPanelInline(props: StaffInlineProps) {
             id={staffState.staff.id}
             showModal={showIssueTagModal}
             closeModal={() => CloseIssueTagModal()}
+            updateParent={UpdateComponent}
+            />
+            <EditTagReturnedModal 
+            id={staffState.staff.id}
+            tag={staffState.staff.tagIssue}
+            showModal={showTagReturnedModal}
+            closeModal={() => CloseTagReturnedModal()}
             updateParent={UpdateComponent}
             />
             <tr>
