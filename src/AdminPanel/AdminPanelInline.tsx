@@ -25,7 +25,6 @@ function AdminPanelInline(props: StaffInlineProps) {
         function ParseJSON(data:IDailyFormNamDep) {
             var dataTXT = JSON.stringify(data);
             var dataJSON = JSON.parse(dataTXT);
-            console.log("dataJson: " + dataJSON.room);
             var staff:Staff = new Staff( {
                 id: dataJSON.id,
                 day: dataJSON.day,
@@ -37,14 +36,9 @@ function AdminPanelInline(props: StaffInlineProps) {
                 tagIssue: dataJSON.tag,
                 tagReturned: dataJSON.tag_ret
             });
-            console.log("staffName: " + staff.meetingRoom);
             let staffInline:StaffInlineProps = {staff};
-
             setStaffForm(staffInline);
-            console.log("meetingRoom" + staffInline.staff.meetingRoom.toString());
-
         }
-        console.log("Updating componenet");
         StaffApiService.getRowByID(id).then((data) => {
             ParseJSON(data);
 
