@@ -9,7 +9,7 @@ import { IStaff, StaffApiService } from "../../Api/api.service";
 import {Staff} from '../../Data/Staff';
 import { StaffAdmin } from "../../Data/StaffAdmin";
 
-
+//ADD update parent
 interface AddNewRowProps{
     day: string
     showModal: boolean,
