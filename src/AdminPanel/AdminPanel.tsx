@@ -34,7 +34,7 @@ function AdminPanel() {
             console.log("No data");
             return staff_list;
         }
-        console.log("length: " + data.toString());
+        //console.log("length: " + data.toString());
         data.forEach(element => {
             var elementTXT = JSON.stringify(element);
             var elementJSON = JSON.parse(elementTXT);
@@ -50,7 +50,7 @@ function AdminPanel() {
             });
             staff_list.push(staff)
         });
-        console.log("admin_panel", staff_list);
+        //console.log("admin_panel", staff_list);
         return staff_list;
     }
 

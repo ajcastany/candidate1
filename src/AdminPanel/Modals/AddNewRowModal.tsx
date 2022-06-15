@@ -1,11 +1,13 @@
 import { type } from "@testing-library/user-event/dist/type";
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import { Form, Modal, ModalFooter, Button } from "react-bootstrap";
 import context from "react-bootstrap/esm/AccordionContext";
 import Select, { ActionMeta, OnChangeValue, OptionContext } from 'react-select';
 import { FormatOptionLabelMeta } from "react-select/dist/declarations/src/Select";
+import { IStaff, StaffApiService } from "../../Api/api.service";
 //import ValueType from 'react-select';
 import {Staff} from '../../Data/Staff';
+import { StaffAdmin } from "../../Data/StaffAdmin";
 
 
 interface AddNewRowProps{
@@ -14,7 +16,7 @@ interface AddNewRowProps{
     closeModal: () => boolean,
 }
 
-type StaffOption = {
+interface StaffOption {
     label: string, value: number, department: string
 }
 const MOCK_DATA= [{
@@ -37,7 +39,27 @@ const MOCK_DATA= [{
 function AddNewRowModal(props:AddNewRowProps) {
     const [selectedDept, setSelectedDept] = useState("");
     const [selectedStaffID, setSelectedStaffID] = useState(0);
+    const [nameOptions, setNameOptions]:[StaffOption[], 
+    (nameOptions:StaffOption[]) => void] = useState<StaffOption[]>([]);
 
+    useEffect( () => {
+        StaffApiService.getAllStaff().then( (data) => {
+            var options:StaffOption[] = [];
+            data.forEach(element => {
+                
+                var dataTXT = JSON.stringify(element);
+                var eJson = JSON.parse(dataTXT);
+                var option:StaffOption = {
+                    value: eJson.id,
+                    label: eJson.name,
+                    department: eJson.department
+                }
+                options.push(option);
+            });
+            
+            setNameOptions(options);
+        })
+    })
     function onChangeHandler(value: OnChangeValue<StaffOption, false>, actionMeta: ActionMeta<StaffOption>) {
         console.log(value);
         if (value?.value !== undefined) {
@@ -62,7 +84,31 @@ function AddNewRowModal(props:AddNewRowProps) {
         });
         return options;
     }
-    var nameOptions = BuildOptions(MOCK_DATA);
+    //var nameOptions = BuildOptions(MOCK_DATA);
+    //var nameOptions:StaffOption[] = [];
+
+    function BuildOptionsFromAPI() {
+        function ParseJSON(data:IStaff[]) {
+            
+            var options:StaffOption[] = [];
+            data.forEach(element => {
+                var dataTXT = JSON.stringify(element);
+                var eJson = JSON.parse(dataTXT);
+                var option:StaffOption = {
+                    value: eJson.id,
+                    label: eJson.name,
+                    department: eJson.department
+                }
+                options.push(option);
+            });
+            
+            return options;
+        }
+        StaffApiService.getAllStaff().then(data => {
+            setNameOptions(ParseJSON(data));
+            console.log("this: " + nameOptions.toString());
+        });
+    }
 
     //Unused...
     const formatOption = (option:StaffOption, 
@@ -70,6 +116,7 @@ function AddNewRowModal(props:AddNewRowProps) {
         //return ( context === 'menu' ? option.label : option.label);
         return (<div></div>)
     }
+    //BuildOptionsFromAPI();
     return (
         <Modal
             show={props.showModal}
