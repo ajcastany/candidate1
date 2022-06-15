@@ -58,7 +58,8 @@ const DailyFormRequests = {
 
 const JsonRequest  = {
     get: (url:string) => http.get(url).then(responseBody),
-    post: (url:string, body:JSON) => http.post(url, body).then(responseBody)
+    post: (url:string, body:JSON) => http.post(url, body).then(responseBody),
+    put: (url:string, body:JSON) => http.put(url,body).then(responseBody)
 }
 
 export const StaffApiService = {
@@ -79,6 +80,7 @@ export const StaffApiService = {
     addTagJSON: (data:JSON): Promise<JSON> => JsonRequest.post('/daily_form/tag', data),
     addTagRet: (day_form:IDailyForm): Promise<IDailyForm> => DailyFormRequests.post('/daily_form/tag_ret', day_form),
     addTagRetJSON: (data:JSON): Promise<JSON> => JsonRequest.post('/daily_form/tag_ret', data),
+    addNewRow: (data:JSON): Promise<JSON> => JsonRequest.put('/daily_form/add_new_entry', data),
 
 };
 
