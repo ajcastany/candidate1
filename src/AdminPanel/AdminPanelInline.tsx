@@ -5,6 +5,7 @@ import {Staff} from '../Data/Staff';
 import AddRoomModal from './Modals/AddRoomModal';
 import EditTagIssueModal from './Modals/EditTagIssueModal';
 import EditTagReturnedModal from './Modals/EditTagReturnedModal';
+import EditTimeModal from './Modals/EditTimeINModal';
 
 interface StaffInlineProps {
     staff: Staff
@@ -30,6 +31,15 @@ function AdminPanelInline(props: StaffInlineProps) {
     const showTagReturnedModel = async () => {
         setShowTagRetunedModal(true);
     }
+    
+    const [showEditTimeModal, setShowEditTimeModal] = useState(false);
+    const [modalTimeInOrOut, setModalTimeInOrOut] = useState('');
+    const showEditTimeModel = async (INOUT:string) => {
+        setModalTimeInOrOut(INOUT);
+        console.log("INOUT" + INOUT);
+        setShowEditTimeModal(true);
+    }
+    
     // Modal Functions
 
     function UpdateComponent(id: number | undefined) {
@@ -71,14 +81,19 @@ function AdminPanelInline(props: StaffInlineProps) {
         setShowTagRetunedModal(false);
         return false;
     }
+
+    function CloseEditTimeModal() {
+        setShowEditTimeModal(false);
+        return false
+    }
     //Inline Renders
     function formatDateToTimeIN(time:string) {
         if (time ==='None') {
-            return (<Button variant='success'>Time In</Button>)
+            return (<Button variant='success' onClick={() => showEditTimeModel("IN")}>Time In</Button>)
         }
         else {
             let timeInFormat = staffState.staff.timeIn.substring(0,5);
-            return (<>{timeInFormat} <Button variant='secondary' size='sm'>
+            return (<>{timeInFormat} <Button variant='secondary' size='sm' onClick={() => showEditTimeModel("IN")}>
                 Edit</Button></>)
         }
     }
@@ -96,17 +111,19 @@ function AdminPanelInline(props: StaffInlineProps) {
 
     function formatDateToTimeOut(time:string) {
         if (time === 'None') {
-            return (<Button variant='danger'>Time Out</Button>)
+            return (<Button variant='danger' 
+            onClick={() => showEditTimeModel("OUT")}>Time Out</Button>)
         }
         else {
             let timeOutFormat = staffState.staff.timeOut.substring(0,5);
-            return(<>{timeOutFormat} <Button variant='secondary' size='sm'>
+            return(<>{timeOutFormat} <Button variant='secondary' size='sm' 
+            onClick={() => showEditTimeModel("OUT")}>
                 Edit
             </Button></>)
         }
     }
     function formatTagRender(tag:string) {
-        console.log("the tag is: "+ tag);
+        //console.log("the tag is: "+ tag);
         if (tag === '') {
             return(<Button variant='primary' onClick={showIssueTagModel}>
                 Issue
@@ -158,6 +175,14 @@ function AdminPanelInline(props: StaffInlineProps) {
             showModal={showTagReturnedModal}
             closeModal={() => CloseTagReturnedModal()}
             updateParent={UpdateComponent}
+            />
+            <EditTimeModal 
+                id={staffState.staff.id}
+                INOUT={modalTimeInOrOut}
+                time={[staffState.staff.timeIn, staffState.staff.timeOut]}
+                showModal={showEditTimeModal}
+                closeModal={() => CloseEditTimeModal()}
+                updateParent={UpdateComponent}
             />
             <tr>
                 <td>{staffState.staff.name}</td>
