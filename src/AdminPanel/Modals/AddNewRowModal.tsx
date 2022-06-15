@@ -61,7 +61,7 @@ function AddNewRowModal(props:AddNewRowProps) {
         })
     },[]);
 
-    
+
     function onChangeHandler(value: OnChangeValue<StaffOption, false>, actionMeta: ActionMeta<StaffOption>) {
         console.log(value);
         if (value?.value !== undefined) {
@@ -73,7 +73,20 @@ function AddNewRowModal(props:AddNewRowProps) {
     function SubmitNewRow() {
         console.log("submit");
         //Add api request.
-        props.closeModal();
+        var data = JSON.stringify({
+            day: props.day,
+            name_id: selectedStaffID,
+        });
+        var dataJSON = JSON.parse(data);
+        
+        StaffApiService.addNewRow(dataJSON).then (
+            res => {
+                console.log(res)
+                props.closeModal();
+            }
+        )
+
+
     }
 
     function BuildOptions (data:any[]) {
@@ -144,11 +157,6 @@ function AddNewRowModal(props:AddNewRowProps) {
                             Department
                         </Form.Label>
                         <Form.Control placeholder={selectedDept} disabled/>
-                        <Form.Label>
-                            Meeting Room
-                        </Form.Label>
-                        <Form.Control />
-                        
                 </Form.Group>
                 </Modal.Body>
                 
