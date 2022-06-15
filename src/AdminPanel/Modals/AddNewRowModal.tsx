@@ -59,7 +59,9 @@ function AddNewRowModal(props:AddNewRowProps) {
             
             setNameOptions(options);
         })
-    })
+    },[]);
+
+    
     function onChangeHandler(value: OnChangeValue<StaffOption, false>, actionMeta: ActionMeta<StaffOption>) {
         console.log(value);
         if (value?.value !== undefined) {
