@@ -4,13 +4,13 @@ import { Form, Modal, ModalFooter, Button } from "react-bootstrap";
 import { StaffApiService, IDailyForm } from "../../Api/api.service";
 
 
-interface TagIssueModalProps {
+interface ITagIssueModalProps {
     id: number | undefined,
     showModal: boolean,
     closeModal: () => boolean,
     updateParent: (id:number | undefined) => void
 }
-function EditTagIssueModal(props: TagIssueModalProps) {
+function EditTagIssueModal(props: ITagIssueModalProps) {
     const [tagValue, setTagValue] = useState({
         id: props.id,
         tag: ''
