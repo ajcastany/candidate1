@@ -7,24 +7,24 @@ import { IDailyForm, StaffApiService } from "../../Api/api.service";
 
 interface IEditTimeModalProps {
     id: number | undefined,
-     timeIN: string,
+    timeIN: string,
     timeOUT: string,
     showModal: boolean,
     closeModal: () => boolean,
     updateParent: (id: number | undefined) => void
 }
 
-function EditTimeINModal(props:IEditTimeModalProps) {
+function EditTimeOUTModal(props:IEditTimeModalProps) {
     const [editTimeState, setEditTimeState] = useState ({
         id: props.id,
-        time: props.timeIN,
+        time: props.timeOUT,
     });
     const [timeValue, setTimeValue] = useState( () => {
-        if (props.timeIN === 'None') {
+        if (props.timeOUT === 'None') {
             return "08:00";
         } 
         else {
-            let time:string = props.timeIN.substring(0,5);
+            let time:string = props.timeOUT.substring(0,5);
             return time;
         }
         
@@ -32,13 +32,13 @@ function EditTimeINModal(props:IEditTimeModalProps) {
 
     const SubmitTimeValue = (e:SyntheticEvent) => {
         e.preventDefault();
-        let timeINFormat = '';
+        let timeOUTFormat = '';
         if (timeValue !== '') {
-            timeINFormat = timeValue + ":00";
+            timeOUTFormat = timeValue + ":00";
         }
         if (timeValue === '') {
             console.log("Empty") 
-            timeINFormat = "None";
+            timeOUTFormat = "None";
         }
         
         console.log("time: " + timeValue);
@@ -47,8 +47,8 @@ function EditTimeINModal(props:IEditTimeModalProps) {
             id: props.id,
             name: 0,
             room: '',
-            time_in: timeINFormat,
-            time_out: props.timeOUT,
+            time_in: props.timeIN,
+            time_out: timeOUTFormat,
             tag: '',
             tag_ret: false
         }
@@ -69,12 +69,12 @@ function EditTimeINModal(props:IEditTimeModalProps) {
         onHide={() => props.closeModal}
     >
         <Modal.Header closeButton>
-            Edit Time IN
+            Edit Time OUT
         </Modal.Header>
             <Form onSubmit={SubmitTimeValue}>
                 <Modal.Body>
                     <Form.Group className="bm-3">
-                        <Form.Label>Enter time <strong>IN</strong></Form.Label>
+                        <Form.Label>Enter time <strong>OUT</strong></Form.Label>
                             <Form.Control 
                                 autoFocus
                                 type='time' 
@@ -94,4 +94,4 @@ function EditTimeINModal(props:IEditTimeModalProps) {
     </Modal>);
 }
 
-export default EditTimeINModal;
+export default EditTimeOUTModal;
