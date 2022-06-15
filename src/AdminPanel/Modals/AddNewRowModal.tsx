@@ -9,6 +9,7 @@ import {Staff} from '../../Data/Staff';
 
 
 interface AddNewRowProps{
+    day: string
     showModal: boolean,
     closeModal: () => boolean,
 }

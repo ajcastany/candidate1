@@ -72,6 +72,7 @@ function AdminPanel() {
     return (
     <div>
         <AddNewRowModal
+            day={attendanceDay}
             showModal={showAddNewRowModal}
             closeModal={() => CloseAddNewModal()} />
         <div className="orange-strip">
