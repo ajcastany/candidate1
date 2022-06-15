@@ -5,6 +5,7 @@ import {Staff} from '../Data/Staff';
 import AddRoomModal from './Modals/AddRoomModal';
 import EditTagIssueModal from './Modals/EditTagIssueModal';
 import EditTagReturnedModal from './Modals/EditTagReturnedModal';
+import EditTimeINModal from './Modals/EditTimeINModal';
 import EditTimeModal from './Modals/EditTimeINModal';
 
 interface StaffInlineProps {
@@ -32,12 +33,13 @@ function AdminPanelInline(props: StaffInlineProps) {
         setShowTagRetunedModal(true);
     }
     
-    const [showEditTimeModal, setShowEditTimeModal] = useState(false);
+    const [showEditTimeINModal, setShowEditTimeOUTModal
+    ] = useState(false);
     const [modalTimeInOrOut, setModalTimeInOrOut] = useState('');
     const showEditTimeModel = async (INOUT:string) => {
         setModalTimeInOrOut(INOUT);
         console.log("INOUT" + INOUT);
-        setShowEditTimeModal(true);
+        setShowEditTimeOUTModal(true);
     }
     
     // Modal Functions
@@ -83,7 +85,7 @@ function AdminPanelInline(props: StaffInlineProps) {
     }
 
     function CloseEditTimeModal() {
-        setShowEditTimeModal(false);
+        setShowEditTimeOUTModal(false);
         return false
     }
     //Inline Renders
@@ -176,11 +178,11 @@ function AdminPanelInline(props: StaffInlineProps) {
             closeModal={() => CloseTagReturnedModal()}
             updateParent={UpdateComponent}
             />
-            <EditTimeModal 
+            <EditTimeINModal
                 id={staffState.staff.id}
                 INOUT={modalTimeInOrOut}
-                time={[staffState.staff.timeIn, staffState.staff.timeOut]}
-                showModal={showEditTimeModal}
+                time={staffState.staff.timeIn}
+                showModal={showEditTimeINModal}
                 closeModal={() => CloseEditTimeModal()}
                 updateParent={UpdateComponent}
             />
