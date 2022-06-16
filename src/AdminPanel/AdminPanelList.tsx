@@ -13,7 +13,7 @@ function AdminPanelList(props: StaffListProps) {
     const [itemsS, setItems]:[Staff[], (items:Staff[]) => void] = useState<Staff[]>([]);
 
     useEffect(() => {
-        console.log("here: " + itemsS);
+        //console.log("here: " + itemsS);
         setRefreshChildren(props.refreshChild)
         setItems(props.staffs)
     })
@@ -22,7 +22,7 @@ function AdminPanelList(props: StaffListProps) {
         setItems(props.staffs);
     },[refreshChildren]);
 
-    console.log(itemsS );
+    //console.log(itemsS );
     const items = itemsS.map(staff => (
         <React.Fragment key={staff.id}>
                 <AdminPanelInline staff={staff}
@@ -39,7 +39,7 @@ function AdminPanelList(props: StaffListProps) {
             {itemsS.map(staff => {
 
             
-                console.log(staff.id);
+                //console.log(staff.id);
                 return (
                 <AdminPanelInline staff={staff}
                 key={staff.id}

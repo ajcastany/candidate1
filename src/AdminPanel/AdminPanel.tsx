@@ -10,7 +10,7 @@ function AdminPanel() {
     const [attendanceDay, setAttendanceDay]= useState(new Date().toISOString().substring(0,10))
     //debug:
     //const [attendanceDay, setAttendanceDay]= useState('2000-01-01')
-    console.log("DATE: ", attendanceDay);
+    //console.log("DATE: ", attendanceDay);
     const [daily_forms, setDailyForms]:[IDailyFormNamDep[], (
         daily_forms: IDailyFormNamDep[]) => void] = useState<IDailyFormNamDep[]>([]);
         
@@ -34,7 +34,7 @@ function AdminPanel() {
     useEffect( () =>{
         console.log("st: " + refreshState.toString());
         StaffApiService.getDay(attendanceDay).then( (data) => {
-            console.log("data:" + (data.toString()));
+            //console.log("data:" + (data.toString()));
             setDailyForms(data)
             });         
     }, [refreshState]);
@@ -47,7 +47,7 @@ function AdminPanel() {
         }, []);
 
     useEffect( () => {
-        console.log("setRows" + daily_forms.toString());
+        //console.log("setRows" + daily_forms.toString());
         var rowDat = BuildRowData(daily_forms)
         setRowsData(rowDat);
     }, [daily_forms])

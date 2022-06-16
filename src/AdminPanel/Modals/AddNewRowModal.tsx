@@ -64,22 +64,26 @@ function AddNewRowModal(props:AddNewRowProps) {
 
 
     function onChangeHandler(value: OnChangeValue<StaffOption, false>, actionMeta: ActionMeta<StaffOption>) {
-        console.log(value);
+        console.log("value: " + value?.value.toString());
         if (value?.value !== undefined) {
+            
             setSelectedStaffID(value.value!);
             setSelectedDept(value.department);
         }
     }
 
     function SubmitNewRow() {
-        console.log("submit");
+        
         //Add api request.
         var data = JSON.stringify({
             day: props.day,
             name_id: selectedStaffID,
         });
         var dataJSON = JSON.parse(data);
-        
+        if (dataJSON.name_id === 0) {
+            props.closeModal();
+            return;
+        }
         StaffApiService.addNewRow(dataJSON).then (
             res => {
                 console.log(res)
