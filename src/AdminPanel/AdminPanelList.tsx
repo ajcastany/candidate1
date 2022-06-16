@@ -32,7 +32,24 @@ function AdminPanelList(props: StaffListProps) {
         </React.Fragment>)
     )
 
-    return <React.Fragment>{items}</React.Fragment>
+    //return <React.Fragment>{items}</React.Fragment>
+    return (
+        
+        <React.Fragment >
+            {itemsS.map(staff => {
+
+            
+                console.log(staff.id);
+                return (
+                <AdminPanelInline staff={staff}
+                key={staff.id}
+                updateParentAdmin={props.updateParentAdmin}
+                refreshChild={props.refreshChild}
+                />)
+            })}
+            
+        </React.Fragment>
+    )
     
     
     
