@@ -14,6 +14,7 @@ interface AddNewRowProps{
     day: string
     showModal: boolean,
     closeModal: () => boolean,
+    updateParentAdmin: () => void;
 }
 
 interface StaffOption {
@@ -82,6 +83,7 @@ function AddNewRowModal(props:AddNewRowProps) {
         StaffApiService.addNewRow(dataJSON).then (
             res => {
                 console.log(res)
+                props.updateParentAdmin();
                 props.closeModal();
             }
         )

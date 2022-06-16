@@ -13,13 +13,10 @@ function AdminPanel() {
     console.log("DATE: ", attendanceDay);
     const [daily_forms, setDailyForms]:[IDailyFormNamDep[], (
         daily_forms: IDailyFormNamDep[]) => void] = useState<IDailyFormNamDep[]>([]);
-    useEffect( () => {
-        StaffApiService.getDay(attendanceDay).then( (data) => {
-            console.log("data:" + (data.toString()));
-            setDailyForms(data)
-            })
-        }, []);
-
+        
+    const [rowsData, setRowsData]:[Staff[], (
+        rowsData: Staff[]) => void] = useState<Staff[]>([]);
+    
     const [showAddNewRowModal, setShowAddNewRowModal] = useState(false);
     const showAddNewRowModel = async () => {
         setShowAddNewRowModal(true);
@@ -27,17 +24,34 @@ function AdminPanel() {
 
 
     const [refreshState, setRefreshState] = useState(false);
-    const toggleRefresh = useCallback(()  => {
+    const toggleRefresh = ()  => {
         setRefreshState(s => !s);
-        OpenDay();
-    }, []);
+        //setRowsData(BuildRowData(daily_forms));
+        //OpenDay();
+    };
 
     //console.log(daily_forms)
     useEffect( () =>{
         console.log("st: " + refreshState.toString());
+        /* StaffApiService.getDay(attendanceDay).then( (data) => {
+            console.log("data:" + (data.toString()));
+            setDailyForms(data)
+            });         */
     }, [refreshState]);
 
+    useEffect( () => {
+        StaffApiService.getDay(attendanceDay).then( (data) => {
+            console.log("data:" + (data.toString()));
+            setDailyForms(data)
+            })
+        }, []);
 
+    useEffect( () => {
+        console.log("setRows" + daily_forms.toString());
+        var rowDat = BuildRowData(daily_forms)
+        setRowsData(rowDat);
+    }, [daily_forms])
+    
     function BuildRowData(data:IDailyFormNamDep[]) {
         var staff_list: Staff[] = [];
     
@@ -78,16 +92,18 @@ function AdminPanel() {
                 })
     }
     // warp this in a use effect?
-    let rowsData:Staff[] = BuildRowData(daily_forms);
+    //let rowsData:Staff[] = BuildRowData(daily_forms);
     //console.log("setREfresh: " + refreshState.toString());
     return (
     <div>
         <AddNewRowModal
             day={attendanceDay}
             showModal={showAddNewRowModal}
-            closeModal={() => CloseAddNewModal()} />
+            closeModal={() => CloseAddNewModal()} 
+            updateParentAdmin={toggleRefresh}
+            />
         <div className="orange-strip">
-            <h2 className="display-4 text-center"><strong>Admin Panel</strong></h2>
+            <h2 className="display-4 text-center"><strong>Admin Panel {refreshState.toString()}</strong></h2>
         </div>
         <Container className="my-auto date-container" style={{display:'flex'}}>
             <Row>
@@ -125,6 +141,7 @@ function AdminPanel() {
                 <tbody>
                     <AdminPanelList staffs={rowsData} 
                     updateParentAdmin={toggleRefresh}
+                    refreshChild={refreshState}
                     />
                 </tbody>
             </table>

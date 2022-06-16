@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button } from 'react-bootstrap';
+import internal from 'stream';
 import { IDailyFormNamDep, StaffApiService } from '../Api/api.service';
 import {Staff} from '../Data/Staff';
 import AddRoomModal from './Modals/AddRoomModal';
@@ -11,13 +12,16 @@ import EditTimeModal from './Modals/EditTimeINModal';
 import EditTimeOUTModal from './Modals/EditTimeOUTModal';
 
 interface StaffInlineProps {
-    staff: Staff,
+    staff: Staff
     updateParentAdmin: () => void
+    refreshChild: boolean
 }
+
 function AdminPanelInline(props: StaffInlineProps) {
-    var staff = props.staff;
     const [staffState, setStaffForm]:[Staff, (
-        staffState: Staff) => void ] = useState(staff);
+        staffState: Staff) => void ] = useState(props.staff);
+
+    const [refreshThis, setRefreshThis] = useState(props.refreshChild);
 
     const [showAddRoomModal, setShowAddRoomModal] = useState(false);
     const showAddRoomModel = async () => {
@@ -51,6 +55,8 @@ function AdminPanelInline(props: StaffInlineProps) {
     const showDeleteEntryModel = async() => {
         setDeleteEntryModal(true);
     }
+
+    
     // Modal Functions
 
     function UpdateComponent(id: number | undefined) {
