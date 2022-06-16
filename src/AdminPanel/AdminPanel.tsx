@@ -103,7 +103,7 @@ function AdminPanel() {
             updateParentAdmin={toggleRefresh}
             />
         <div className="orange-strip">
-            <h2 className="display-4 text-center"><strong>Admin Panel {refreshState.toString()}</strong></h2>
+            <h2 className="display-4 text-center"><strong>Admin Panel</strong></h2>
         </div>
         <Container className="my-auto date-container" style={{display:'flex'}}>
             <Row>
