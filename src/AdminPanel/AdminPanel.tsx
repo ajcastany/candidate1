@@ -129,6 +129,7 @@ function AdminPanel() {
             <table className="table table-striped table-hover table-responsive">
                 <thead className="table">
                     <tr>
+                        <th scope="col">ID</th>
                         <th scope="col">Name</th>
                         <th scope="col">Department</th>
                         <th scope="col">Meeting Room</th>

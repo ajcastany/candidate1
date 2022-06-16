@@ -227,6 +227,8 @@ function AdminPanelInline(props: StaffInlineProps) {
                 updateParentAdmin={props.updateParentAdmin}
             />
             <tr>
+
+                <th scope='row'>{staffState.id}</th>
                 <td>{staffState.name}</td>
                 <td>{staffState.department}</td>
                 <td>{renderMeetingRoom()}</td>
