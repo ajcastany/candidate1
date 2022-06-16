@@ -33,10 +33,10 @@ function AdminPanel() {
     //console.log(daily_forms)
     useEffect( () =>{
         console.log("st: " + refreshState.toString());
-        /* StaffApiService.getDay(attendanceDay).then( (data) => {
+        StaffApiService.getDay(attendanceDay).then( (data) => {
             console.log("data:" + (data.toString()));
             setDailyForms(data)
-            });         */
+            });         
     }, [refreshState]);
 
     useEffect( () => {
