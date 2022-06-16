@@ -29,6 +29,7 @@ function AdminPanel() {
     const [refreshState, setRefreshState] = useState(false);
     const toggleRefresh = useCallback(()  => {
         setRefreshState(s => !s);
+        OpenDay();
     }, []);
 
     //console.log(daily_forms)

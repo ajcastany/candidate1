@@ -18,9 +18,9 @@ function DeleteRowModal(props:IDeleteRowProps) {
         e.preventDefault();
         StaffApiService.deleteEntry(props.id).then( res => {
         console.log(res);
-            
+
         });
-        props.updateParentAdmin();
+        props.updateParentAdmin();            
         props.closeModal();
     }
 
