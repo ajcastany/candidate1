@@ -9,21 +9,25 @@ interface StaffListProps {
 }
 
 function AdminPanelList(props: StaffListProps) {
-    const [refreshChildren, setRefreshChildren] = useState(props.refreshChild);
+    const [refreshChildren, setRefreshChildren] = useState<boolean>();
     const [itemsS, setItems]:[Staff[], (items:Staff[]) => void] = useState<Staff[]>([]);
 
     useEffect(() => {
+        console.log("here: " + itemsS);
+        setRefreshChildren(props.refreshChild)
         setItems(props.staffs)
-    }, [])
+    })
+    //USE this: https://stackoverflow.com/questions/59636937/react-useeffect-and-return-render
     useEffect(() => {
         setItems(props.staffs);
     },[refreshChildren]);
 
-    const items = props.staffs.map(staff => (
+    console.log(itemsS );
+    const items = itemsS.map(staff => (
         <React.Fragment key={staff.id}>
                 <AdminPanelInline staff={staff}
                 updateParentAdmin={props.updateParentAdmin}
-                refreshChild={refreshChildren} 
+                refreshChild={props.refreshChild} 
                 />
         </React.Fragment>)
     )
