@@ -48,18 +48,27 @@ function BuildRowData(data:IDailyFormNamDep[]) {
 
 function AttendanceForm() {
     //console.log(JSON.stringify(MOCK_DATA, null, ''));
+    const [attendanceDay, setAttendanceDay]= useState(new Date().toISOString().substring(0,10))
+    //debug:
     const  [daily_forms, setDailyForms]:[IDailyFormNamDep[], (
         daily_forms: IDailyFormNamDep[]) => void] = useState<IDailyFormNamDep[]>([]);
     useEffect( () => {
-        StaffApiService.getAllDays().then((data) => setDailyForms(data));
+        StaffApiService.getDay(attendanceDay).then((data) => setDailyForms(data));
     }, [])
     //console.log(daily_forms);
     let rowData:Staff[] = BuildRowData(daily_forms);
+    function formatAttendanceDay(day:string) {
+        let daySplit = day.split("-")
+        return daySplit[2] + "/" + daySplit[1] + "/" + daySplit[0]
+    }
     return (
         <div>
             <div className="blue-strip">
                 <h2 className="display-4 text-center"><strong>Attendance Form</strong></h2>
             </div>
+                <div className="container">
+                    <h2 className="display-6 text-center"><strong>{formatAttendanceDay(attendanceDay)}</strong></h2>
+                </div>
                 <div className="container">
                 <table className="table table-striped table-hover table-responsive">
                     <thead className="table-dark">
