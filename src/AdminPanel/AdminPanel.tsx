@@ -105,7 +105,7 @@ function AdminPanel() {
         <div className="orange-strip">
             <h2 className="display-4 text-center"><strong>Admin Panel</strong></h2>
         </div>
-        <Container className="my-auto date-container" style={{display:'flex'}}>
+        <Container className="mb-3 my-auto date-container" style={{display:'flex'}}>
             <Row>
                 <Col>
             <Form.Group>
@@ -137,9 +137,10 @@ function AdminPanel() {
                         <th scope="col">Time Out</th>
                         <th scope="col">Tag Issued</th>
                         <th scope="col">Tag Returned?</th>
+                        <th scope="col">Delete</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody className="mb-3">
                     <AdminPanelList staffs={rowsData} 
                     updateParentAdmin={toggleRefresh}
                     refreshChild={refreshState}

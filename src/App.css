@@ -19,6 +19,7 @@
 }
 
 .orange-strip {
+    max-width:100%;
     width: 100%;
     background-color: orange;
     border-bottom: 1px solid black;

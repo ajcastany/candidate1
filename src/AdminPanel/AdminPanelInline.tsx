@@ -226,7 +226,7 @@ function AdminPanelInline(props: StaffInlineProps) {
                 closeModal={() => CloseDeleteEntryModal()}
                 updateParentAdmin={props.updateParentAdmin}
             />
-            <tr>
+            <tr className='mb-3'>
 
                 <th scope='row'>{staffState.id}</th>
                 <td>{staffState.name}</td>

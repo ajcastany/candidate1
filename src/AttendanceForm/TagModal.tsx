@@ -51,7 +51,6 @@ function TagModal(props: TagModelProps) {
             backdrop="static"
             keyboard={false}
             onHide={() => props.closeModal()}
-            cancel={() => props.closeModal()}
 
             >
             <Modal.Header closeButton>
