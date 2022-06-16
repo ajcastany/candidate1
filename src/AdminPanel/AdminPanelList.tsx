@@ -4,12 +4,15 @@ import AdminPanelInline from './AdminPanelInline';
 
 interface StaffListProps {
     staffs: Staff[]
+    updateParentAdmin: () => void
 }
 
-function AdminPanelList({staffs}: StaffListProps) {
-    const items = staffs.map(staff => (
+function AdminPanelList(props: StaffListProps) {
+    const items = props.staffs.map(staff => (
         <React.Fragment key={staff.id}>
-                <AdminPanelInline staff={staff}/>
+                <AdminPanelInline staff={staff}
+                updateParentAdmin={props.updateParentAdmin}
+                />
         </React.Fragment>)
     )
 

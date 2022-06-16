@@ -3,6 +3,7 @@ import { Button } from 'react-bootstrap';
 import { IDailyFormNamDep, StaffApiService } from '../Api/api.service';
 import {Staff} from '../Data/Staff';
 import AddRoomModal from './Modals/AddRoomModal';
+import DeleteRowModal from './Modals/DeleteRowModal';
 import EditTagIssueModal from './Modals/EditTagIssueModal';
 import EditTagReturnedModal from './Modals/EditTagReturnedModal';
 import EditTimeINModal from './Modals/EditTimeINModal';
@@ -10,12 +11,13 @@ import EditTimeModal from './Modals/EditTimeINModal';
 import EditTimeOUTModal from './Modals/EditTimeOUTModal';
 
 interface StaffInlineProps {
-    staff: Staff
+    staff: Staff,
+    updateParentAdmin: () => void
 }
 function AdminPanelInline(props: StaffInlineProps) {
-    var {staff} = props;
-    const [staffState, setStaffForm]:[StaffInlineProps, (
-        staffState: StaffInlineProps) => void ] = useState({staff});
+    var staff = props.staff;
+    const [staffState, setStaffForm]:[Staff, (
+        staffState: Staff) => void ] = useState(staff);
 
     const [showAddRoomModal, setShowAddRoomModal] = useState(false);
     const showAddRoomModel = async () => {
@@ -45,6 +47,10 @@ function AdminPanelInline(props: StaffInlineProps) {
         setShowEditTimeOUTModal(true);
     }
     
+    const [showDeleteEntryModal, setDeleteEntryModal] = useState(false);
+    const showDeleteEntryModel = async() => {
+        setDeleteEntryModal(true);
+    }
     // Modal Functions
 
     function UpdateComponent(id: number | undefined) {
@@ -62,7 +68,7 @@ function AdminPanelInline(props: StaffInlineProps) {
                 tagIssue: dataJSON.tag,
                 tagReturned: dataJSON.tag_ret
             });
-            let staffInline:StaffInlineProps = {staff};
+            let staffInline:Staff = staff;
             setStaffForm(staffInline);
         }
         StaffApiService.getRowByID(id).then((data) => {
@@ -96,23 +102,28 @@ function AdminPanelInline(props: StaffInlineProps) {
         setShowEditTimeOUTModal(false);
         return false;
     }
+    function CloseDeleteEntryModal() {
+        setDeleteEntryModal(false);
+        return false;
+    }
+
     //Inline Renders
     function formatDateToTimeIN(time:string) {
         if (time ==='None') {
             return (<Button variant='success' onClick={() => showEditTimeModel()}>Time In</Button>)
         }
         else {
-            let timeInFormat = staffState.staff.timeIn.substring(0,5);
+            let timeInFormat = staffState.timeIn.substring(0,5);
             return (<>{timeInFormat} <Button variant='secondary' size='sm' onClick={() => showEditTimeModel()}>
                 Edit</Button></>)
         }
     }
     function renderMeetingRoom() {
-        if (staffState.staff.meetingRoom === '') {
+        if (staffState.meetingRoom === '') {
             return(<Button onClick={showAddRoomModel}>Add Room</Button>)
         }
-        if (staffState.staff.meetingRoom !== '') {
-            return(<>{staffState.staff.meetingRoom} <Button
+        if (staffState.meetingRoom !== '') {
+            return(<>{staffState.meetingRoom} <Button
             variant='secondary' size='sm' onClick={showEditRoomModel}>
                 Edit
                 </Button></>)
@@ -125,7 +136,7 @@ function AdminPanelInline(props: StaffInlineProps) {
             onClick={() => showEditTimeOUTModel()}>Time Out</Button>)
         }
         else {
-            let timeOutFormat = staffState.staff.timeOut.substring(0,5);
+            let timeOutFormat = staffState.timeOut.substring(0,5);
             return(<>{timeOutFormat} <Button variant='secondary' size='sm' 
             onClick={() => showEditTimeOUTModel()}>
                 Edit
@@ -141,22 +152,22 @@ function AdminPanelInline(props: StaffInlineProps) {
         }
         else {
             return (
-                <>{staffState.staff.tagIssue} <Button variant='secondary' onClick={showIssueTagModel} size='sm'>
+                <>{staffState.tagIssue} <Button variant='secondary' onClick={showIssueTagModel} size='sm'>
                     Edit
                     </Button></>
             );
         }
     }
     function formatTagReturned() {
-        var tagRetStr = staffState.staff.tagReturned.toString();
-        var tag = staffState.staff.tagIssue;
+        var tagRetStr = staffState.tagReturned.toString();
+        var tag = staffState.tagIssue;
         if (tagRetStr ==='false' && tag === '') {
             return ('')
         }
-        if (tagRetStr === 'false' && tag!=='' && staffState.staff.timeOut !== 'None') {
+        if (tagRetStr === 'false' && tag!=='' && staffState.timeOut !== 'None') {
             return (<>No <Button variant='danger' size='sm' onClick={showTagReturnedModel}>Edit</Button></>)
         }
-        if (tagRetStr === 'false' && tag!=='' && staffState.staff.timeOut === 'None') {
+        if (tagRetStr === 'false' && tag!=='' && staffState.timeOut === 'None') {
             return (<Button variant='primary' onClick={showTagReturnedModel}>Edit</Button>)
         }
         if (tagRetStr === 'true') {
@@ -167,50 +178,57 @@ function AdminPanelInline(props: StaffInlineProps) {
     return (
         <React.Fragment>
             <AddRoomModal
-                id={staffState.staff.id}
-                name={staffState.staff.name}
+                id={staffState.id}
+                name={staffState.name}
                 showModal={showAddRoomModal}
                 closeModal={() => CloseAddRoomModal()}
                 updateParent={UpdateComponent}
             />
             <EditTagIssueModal 
-            id={staffState.staff.id}
+            id={staffState.id}
             showModal={showIssueTagModal}
             closeModal={() => CloseIssueTagModal()}
             updateParent={UpdateComponent}
             />
             <EditTagReturnedModal 
-            id={staffState.staff.id}
-            tag={staffState.staff.tagIssue}
+            id={staffState.id}
+            tag={staffState.tagIssue}
             showModal={showTagReturnedModal}
             closeModal={() => CloseTagReturnedModal()}
             updateParent={UpdateComponent}
             />
             <EditTimeINModal
-                id={staffState.staff.id}
-                timeIN={staffState.staff.timeIn}
-                timeOUT={staffState.staff.timeOut}
+                id={staffState.id}
+                timeIN={staffState.timeIn}
+                timeOUT={staffState.timeOut}
                 showModal={showEditTimeINModal}
                 closeModal={() => CloseEditTimeINModal()}
                 updateParent={UpdateComponent}
             />
             <EditTimeOUTModal 
-                id={staffState.staff.id}
-                timeIN={staffState.staff.timeIn}
-                timeOUT={staffState.staff.timeOut}
+                id={staffState.id}
+                timeIN={staffState.timeIn}
+                timeOUT={staffState.timeOut}
                 showModal={showEditTimeOUTModal}
                 closeModal={() => CloseEditTimeOUTModal()}
                 updateParent={UpdateComponent}
             />
+            <DeleteRowModal 
+                id={staffState.id}
+                name={staffState.name}
+                showModal={showDeleteEntryModal}
+                closeModal={() => CloseDeleteEntryModal()}
+                updateParentAdmin={props.updateParentAdmin}
+            />
             <tr>
-                <td>{staffState.staff.name}</td>
-                <td>{staffState.staff.department}</td>
+                <td>{staffState.name}</td>
+                <td>{staffState.department}</td>
                 <td>{renderMeetingRoom()}</td>
-                <td>{formatDateToTimeIN(staffState.staff.timeIn)}</td>
-                <td>{formatDateToTimeOut(staffState.staff.timeOut)}</td>
-                <td>{formatTagRender(staffState.staff.tagIssue)}</td>
+                <td>{formatDateToTimeIN(staffState.timeIn)}</td>
+                <td>{formatDateToTimeOut(staffState.timeOut)}</td>
+                <td>{formatTagRender(staffState.tagIssue)}</td>
                 <td>{formatTagReturned()}</td> 
-                <td><Button variant='danger'>Delete</Button></td>
+                <td><Button variant='danger' onClick={showDeleteEntryModel}>Delete</Button></td>
             </tr>
         </React.Fragment>
     );

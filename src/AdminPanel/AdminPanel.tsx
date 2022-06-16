@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { Button, Container, Form, Row, Col } from "react-bootstrap";
 import { IDailyFormNamDep, StaffApiService } from "../Api/api.service";
 import AdminPanelList from "./AdminPanelList";
@@ -24,8 +24,18 @@ function AdminPanel() {
     const showAddNewRowModel = async () => {
         setShowAddNewRowModal(true);
     }
-    
-    console.log(daily_forms)
+
+
+    const [refreshState, setRefreshState] = useState(false);
+    const toggleRefresh = useCallback(()  => {
+        setRefreshState(s => !s);
+    }, []);
+
+    //console.log(daily_forms)
+    useEffect( () =>{
+        console.log("st: " + refreshState.toString());
+    }, [refreshState]);
+
 
     function BuildRowData(data:IDailyFormNamDep[]) {
         var staff_list: Staff[] = [];
@@ -67,8 +77,8 @@ function AdminPanel() {
                 })
     }
 
-    let rowsData:Staff[] = BuildRowData(daily_forms)
-
+    let rowsData:Staff[] = BuildRowData(daily_forms);
+    //console.log("setREfresh: " + refreshState.toString());
     return (
     <div>
         <AddNewRowModal
@@ -112,7 +122,9 @@ function AdminPanel() {
                     </tr>
                 </thead>
                 <tbody>
-                    <AdminPanelList staffs={rowsData} />
+                    <AdminPanelList staffs={rowsData} 
+                    updateParentAdmin={toggleRefresh}
+                    />
                 </tbody>
             </table>
         </div>
