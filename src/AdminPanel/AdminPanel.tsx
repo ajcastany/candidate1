@@ -7,9 +7,9 @@ import TagModal from "../AttendanceForm/TagModal";
 import AddNewRowModal from "./Modals/AddNewRowModal";
 
 function AdminPanel() {
-    //const [attendanceDay, setAttendanceDay]= useState(new Date().toISOString().substring(0,10))
+    const [attendanceDay, setAttendanceDay]= useState(new Date().toISOString().substring(0,10))
     //debug:
-    const [attendanceDay, setAttendanceDay]= useState('2000-01-01')
+    //const [attendanceDay, setAttendanceDay]= useState('2000-01-01')
     console.log("DATE: ", attendanceDay);
     const [daily_forms, setDailyForms]:[IDailyFormNamDep[], (
         daily_forms: IDailyFormNamDep[]) => void] = useState<IDailyFormNamDep[]>([]);
