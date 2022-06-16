@@ -194,8 +194,7 @@ function StaffInline(props: StaffInlineProps) {
             tag={staffState.staff.tagIssue}
             />
             <tr>
-                <th scope='row'>{staffState.staff.id}</th>
-                <td>{staffState.staff.name}</td>
+                <th scope="row">{staffState.staff.name}</th>
                 <td>{staffState.staff.department}</td>
                 <td>{staffState.staff.meetingRoom}</td>
                 <td>{formatDateToTimeIN(staffState.staff.timeIn)}</td>
