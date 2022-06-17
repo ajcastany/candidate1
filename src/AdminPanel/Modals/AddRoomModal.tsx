@@ -24,7 +24,7 @@ function AddRoomModal(props:AddRoomProps) {
             const data:IDailyForm = {day: new Date(),
             id:meetingRoom.id,
             name: 0,
-            room: meetingRoom.room,
+            room: roomSubstr,
             time_in: new Date().toLocaleTimeString('en-GB'),
             time_out: new Date().toLocaleTimeString('en-GB'),
             tag: "",
