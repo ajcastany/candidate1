@@ -58,8 +58,11 @@ function AttendanceForm() {
     //console.log(daily_forms);
     let rowData:Staff[] = BuildRowData(daily_forms);
     function formatAttendanceDay(day:string) {
-        let daySplit = day.split("-")
-        return daySplit[2] + "/" + daySplit[1] + "/" + daySplit[0]
+        //let daySplit = day.split("-")
+        //return daySplit[2] + "/" + daySplit[1] + "/" + daySplit[0]
+        let date:Date = new Date(day);
+        let dayString:string = date.toLocaleDateString('en-GB', {weekday:'long', day:'numeric', month:'long', year:'numeric'})
+        return dayString;
     }
     return (
         <div>
