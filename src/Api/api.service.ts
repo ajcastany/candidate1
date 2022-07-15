@@ -39,7 +39,7 @@ export interface IDailyForm {
 }
 
 const http = axios.create({
-    baseURL: 'http://localhost:5000/api',
+    baseURL: 'http://candidate-backend-dev.eu-west-2.elasticbeanstalk.com/api',
     headers: {
         "Content-type": "application/json"
     }
