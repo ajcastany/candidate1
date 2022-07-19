@@ -1,4 +1,4 @@
-import { AxiosResponse } from "Axios";
+import { AxiosResponse } from "axios";
 import { Staff } from "../Data/Staff";
 
 const axios = require('axios');
