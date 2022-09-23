@@ -8,7 +8,7 @@ function HomePage() {
         <div>
             <h1 className="display-1 text-center">Staff Attendance App</h1>
             <div className="col-sm-5 mx-auto">
-                <p className="text-center">Register daily staff attendance to your organization, book meeting rooms, issue numbered Tags, clock in-out your staff and remind them to return the tags, if any were issued to them </p>
+                <p className="text-center">Register daily staff attendance to your organization, book meeting rooms, issue numbered Tags, clock in-out your staff and remind them to return the tags, if any were issued to them. </p>
             </div>
             <Container>
                 <Row className="justify-content-md-center my-top-margin">
@@ -24,7 +24,7 @@ function HomePage() {
                         <Link className='display-4 title-link' to='attendance'>
                             Attendance Form
                         </Link>
-                        <p className="title-p mx-auto">An app running on an tablet.  Allows staff to clock in or out and will remind them to return their tags if any was assigned to them.</p>
+                        <p className="title-p mx-auto">Made for running on an tablet.  Allows staff to clock in or out and will remind them to return their tags if any was assigned to them.</p>
                     </Col>
                 </Row>
             </Container>
