@@ -15,15 +15,15 @@ export interface IStaff {
 export interface IDailyFormNamDep {
     form: {
         day:Date,
-        id: number, 
-        name: number, 
+        id: number,
+        name: number,
         room: string,
         time_in: string,
         time_out: string,
         tag: string,
         tag_ret: boolean,
         name_dep: {staff_name: string, staff_dept: string}
-    }        
+    }
 }
 
 export interface IDailyForm {
@@ -35,7 +35,7 @@ export interface IDailyForm {
     time_out: string,
     tag: string,
     tag_ret: boolean
-    
+
 }
 
 const http = axios.create({
@@ -85,7 +85,7 @@ export const StaffApiService = {
     deleteEntry: (entry:number|undefined): Promise<JSON> => JsonRequest.delete(`/daily_form/delete_entry/${entry}`),
 };
 
-/* 
+/*
 class ApiService {
     getAllStaff() {return http.get<Staff[]>('/staff/all');}
     getStaff(id:number) {return http.get(`/staff/${id}`);}
@@ -100,6 +100,3 @@ class ApiService {
 export default new ApiService();
 
  */
-
-
-
