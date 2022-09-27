@@ -16,7 +16,7 @@ function HomePage() {
                         <Link className='display-4 title-link' to='admin'>
                             Admin Panel
                         </Link>
-                        <p className="title-p mx-auto">For system administrators: Add or remove entries assign meetings rooms or edit data in any row.</p>
+                        <p className="title-p mx-auto">For system administrators: Add or remove entries, assign meetings rooms or edit data in any row.</p>
 
                     </Col>
 
@@ -24,7 +24,7 @@ function HomePage() {
                         <Link className='display-4 title-link' to='attendance'>
                             Attendance Form
                         </Link>
-                        <p className="title-p mx-auto">Made for running on an tablet.  Allows staff to clock in or out and will remind them to return their tags if one was assigned to them.</p>
+                        <p className="title-p mx-auto">Made for running on an tablet at the entrance of your organization.  Allows staff to clock in or out and will remind them to return their tags if one was assigned to them.</p>
                     </Col>
                 </Row>
             </Container>
