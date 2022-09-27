@@ -13,10 +13,10 @@ function AdminPanel() {
     //console.log("DATE: ", attendanceDay);
     const [daily_forms, setDailyForms]:[IDailyFormNamDep[], (
         daily_forms: IDailyFormNamDep[]) => void] = useState<IDailyFormNamDep[]>([]);
-        
+
     const [rowsData, setRowsData]:[Staff[], (
         rowsData: Staff[]) => void] = useState<Staff[]>([]);
-    
+
     const [showAddNewRowModal, setShowAddNewRowModal] = useState(false);
     const showAddNewRowModel = async () => {
         setShowAddNewRowModal(true);
@@ -36,7 +36,7 @@ function AdminPanel() {
         StaffApiService.getDay(attendanceDay).then( (data) => {
             //console.log("data:" + (data.toString()));
             setDailyForms(data)
-            });         
+            });
     }, [refreshState]);
 
     useEffect( () => {
@@ -51,10 +51,10 @@ function AdminPanel() {
         var rowDat = BuildRowData(daily_forms)
         setRowsData(rowDat);
     }, [daily_forms])
-    
+
     function BuildRowData(data:IDailyFormNamDep[]) {
         var staff_list: Staff[] = [];
-    
+
         if (data.length == 0) {
             console.log("No data");
             return staff_list;
@@ -99,7 +99,7 @@ function AdminPanel() {
         <AddNewRowModal
             day={attendanceDay}
             showModal={showAddNewRowModal}
-            closeModal={() => CloseAddNewModal()} 
+            closeModal={() => CloseAddNewModal()}
             updateParentAdmin={toggleRefresh}
             />
         <div className="orange-strip">
@@ -110,21 +110,21 @@ function AdminPanel() {
                 <Col>
             <Form.Group>
                 <Form.Label>Select Date</Form.Label>
-                <Form.Control type='date' 
+                <Form.Control type='date'
                 placeholder="aaa"
                 name='attendance-day'
-                
+
                 value={attendanceDay}
                 onChange={(e) => setAttendanceDay(e.target.value)} />
-                
+
             </Form.Group>
             </Col>
             <Col className='open-button py-auto' style={{display:'flex'}} >
-            <Button className="open-button" onClick={OpenDay}>Open Day</Button> 
+            <Button className="open-button" onClick={OpenDay}>Open Day</Button>
             </Col>
             </Row>
         </Container>
-        
+
         <div className="container">
             <table className="table table-striped table-hover table-responsive">
                 <thead className="table">
@@ -141,7 +141,7 @@ function AdminPanel() {
                     </tr>
                 </thead>
                 <tbody className="mb-3">
-                    <AdminPanelList staffs={rowsData} 
+                    <AdminPanelList staffs={rowsData}
                     updateParentAdmin={toggleRefresh}
                     refreshChild={refreshState}
                     />
@@ -150,9 +150,9 @@ function AdminPanel() {
         </div>
         <Container>
             <Button onClick={showAddNewRowModel}>Add new Entry</Button>
-        </Container>    
+        </Container>
     </div>
- 
+
     );
 }
 

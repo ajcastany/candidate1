@@ -27,6 +27,7 @@
 }
 
 .blue-strip {
+    max-width: 100%;
     width: 100%;
     background-color: #0978D8;
     border-bottom: 1px solid black;
