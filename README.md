@@ -90,8 +90,8 @@ If the staff member has clocked out, the **Tag Returned** column changes to Yes/
 
 Clicking on the **Delete** button will delete the entire row:
 
-![delete row](.github/images/detele_row.png)
+![delete row](.github/images/delete_row.png)
 
 ![delete modal](.github/images/del_modal.png)
 
-1[deleted row](.github/images/deleted_row.png)
+![deleted row](.github/images/deleted_row.png)
