@@ -55,7 +55,7 @@ Click on the current day to open the calendar and select the day for the attenda
 
 click on **Add New Entry** button at the bottom of the page:
 
-![add new entry](.github/images/admin_panel.png)
+![add new entry](.github/images/admin_panel_empty.png)
 
 Start typing or select the name from the list and click **Create Entry**.
 
