@@ -88,10 +88,14 @@ If the staff member has clocked out, the **Tag Returned** column changes to Yes/
 
 ### Delete Entry
 
-Clicking on the **Delete** button will delete the entire row:
+Clicking on the **Delete** button will pop up a modal asking for confirmation:
 
 ![delete row](.github/images/delete_row.png)
 
+The name of the staff for the row appears in the modal:
+
 ![delete modal](.github/images/del_modal.png)
+
+Click delete to delete the entire row:
 
 ![deleted row](.github/images/deleted_row.png)
